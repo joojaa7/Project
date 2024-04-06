@@ -1,9 +1,6 @@
-let x;
-let y;
-
 const getPos  = () => navigator.geolocation.getCurrentPosition((pos) => {
-    x = pos.coords.latitude;
-    y = pos.coords.longitude;
+    const x = pos.coords.latitude;
+    const y = pos.coords.longitude;
     map.setView([x, y], 13)
 })
 
