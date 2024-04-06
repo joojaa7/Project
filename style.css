@@ -1,5 +1,7 @@
 #map { 
-    height: 800px; 
+    height: 80vh;
+    width: 60vw;
+    margin-left: auto; 
 }
 
 aside {
@@ -7,7 +9,6 @@ aside {
     padding-left: 0.5rem;
     margin-left: 0.5rem;
     float: right;
-    font-style: italic;
     font-size: 20px;
     color: #29627e;
   }
@@ -15,8 +16,8 @@ aside {
   #login {
     float: right;
     position: fixed;
-    top: 10px;
-    right: 100px;
+    top: 2rem;
+    right: 11rem;
 }
 
 h1 {
@@ -27,5 +28,5 @@ h2 {
 }
 
 body {
-    background-color: rgb(163, 157, 154);
+    background-color: rgb(221, 213, 210);
 }
