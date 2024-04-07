@@ -17,15 +17,26 @@
 
 <body>
   <h1>Restaurants</h1>
-  <aside>
-    <h2>Info:</h2>
+  <aside id="restaurantInfo">
+    <ul>
+      <li><a href="#daily">Daily</a></li>
+      <li><a href="#weekly">Weekly</a></li>
+      <li><a href="#infobox">Info</a></li>
+    </ul>
     <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
       Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
       Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
       Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
   </aside>
   <div id="login">
-    <button>Login</button>
+    <form action="/action_page.php">
+      <label for="uname">Username:</label><br>
+      <input type="text" id="uname" placeholder="Username"><br>
+      <label for="pw">Password:</label><br>
+      <input type="text" id="pw" placeholder="Password"><br>
+      <input type="submit" id="submit" value="Log In">
+      <p id="register">Register</p>
+    </form> 
   </div>
   <div id="map"></div>
 </body>

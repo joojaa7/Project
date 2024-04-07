@@ -1,32 +1,76 @@
-#map { 
-    height: 80vh;
-    width: 60vw;
-    margin-left: auto; 
-}
-
-aside {
-    width: 20%;
-    padding-left: 0.5rem;
-    margin-left: 0.5rem;
-    float: right;
-    font-size: 20px;
-    color: #29627e;
-  }
-
-  #login {
-    float: right;
-    position: fixed;
-    top: 2rem;
-    right: 11rem;
+body {
+    background-color: rgb(221, 213, 210);
 }
 
 h1 {
     text-align: center;
 }
-h2 {
+
+#restaurantInfo {
+    width: 15%;
+    padding-left: 0.5rem;
+    margin-right: 8rem;
+    margin-top: 10vh;
+    float: right;
+    font-size: 20px;
+    border-style: solid;
+}
+
+ul {
+    list-style-type: none;
+    display: table;
+    table-layout: fixed;
+
+    margin: 1.5rem;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
+}
+  
+
+li {
+    float: left;
+    display: table-cell;
     text-align: center;
 }
 
-body {
-    background-color: rgb(221, 213, 210);
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    text-decoration: none;
 }
+
+li a:hover {
+    background-color: #111111;
+}
+
+
+#login {
+    float: right;
+    position: fixed;
+    top: 2rem;
+    right: 11vw;
+}
+
+#register {
+    margin-top: 0px;
+    margin-left: 30%;
+    color: rgb(88, 130, 185);
+    text-decoration: underline;
+}
+
+
+
+#submit {
+    margin-top: 0.5rem;
+    margin-left: 3rem;
+}
+
+#map { 
+    height: 80vh;
+    width: 55%;
+    margin-left: 10vw; 
+}
+
