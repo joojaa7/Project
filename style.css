@@ -14,6 +14,7 @@ h1 {
     float: right;
     font-size: 20px;
     border-style: solid;
+    border-radius: 8px;
 }
 
 ul {
@@ -72,5 +73,6 @@ li a:hover {
     height: 80vh;
     width: 55%;
     margin-left: 10vw; 
+    border-radius: 8px;
 }
 
