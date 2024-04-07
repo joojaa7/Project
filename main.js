@@ -12,3 +12,7 @@ L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{
 }).addTo(map);
 
 getPos();
+document.getElementById('daily').addEventListener('click', () => {
+    const text = document.getElementById('asideParagraph');
+    text.innerHTML = 'Daily';
+})
