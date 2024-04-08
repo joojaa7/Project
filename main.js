@@ -1,10 +1,5 @@
 import { fetchRestaurants} from './utils.js';
 
-
-/*const getRestaurant = async () => {
-    await fetchRestaurants();
-}*/
-
 const restaurants = await fetchRestaurants();
 
 const getPos  = () => navigator.geolocation.getCurrentPosition((pos) => {
@@ -27,7 +22,7 @@ document.getElementById('daily').addEventListener('click', () => {
 })
 
 Array.from(restaurants).forEach((restaurant) => {
-      const marker = L.marker([restaurant.location.coordinates[1],restaurant.location.coordinates[0]]).addTo(map);
+        const marker = L.marker([restaurant.location.coordinates[1],restaurant.location.coordinates[0]]).addTo(map);
         marker.bindPopup(`<h3>${restaurant.name}</h3>
                     <p>${restaurant.address}</p>`);
 });
