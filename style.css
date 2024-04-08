@@ -1,79 +1,81 @@
+html {
+    font-family: Verdana, sans-serif;
+}
 body {
-    background-color: rgb(221, 213, 210);
+    background-color: rgb(104, 97, 95);
 }
 
-h1 {
-    text-align: center;
-}
-
-#restaurantInfo {
-    width: 15%;
-    padding-left: 0.5rem;
-    margin-right: 8rem;
-    margin-top: 10vh;
-    float: right;
-    font-size: 20px;
+aside {
+    background-color: rgb(168, 154, 149);
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    width: 20%;
+    top: 20%;
+    right: 5%;
+    position: absolute;
     border-style: solid;
     border-radius: 8px;
+    padding: 1rem;
 }
 
 ul {
+    width: 100%;
+    display: flex;
     list-style-type: none;
-    display: table;
-    table-layout: fixed;
-
-    margin: 1.5rem;
+    justify-content: space-evenly;
     padding: 0;
-    overflow: hidden;
-    background-color: #333333;
 }
-  
 
 li {
-    float: left;
-    display: table-cell;
-    text-align: center;
+    margin-right: 1rem;
 }
 
 li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 16px;
+    font-weight: bold;
     text-decoration: none;
+    color: rgb(0, 0, 0);
 }
 
 li a:hover {
-    background-color: #111111;
+    background-color: rgb(95, 84, 82)
 }
 
-
+#asideParagraph {
+    text-align: center;
+}
 
 #login {
-    float: right;
-    position: fixed;
+    position: absolute;
     top: 2rem;
-    right: 11vw;
+    right: 10%;
+}
+
+input {
+    margin: 0.3rem;
+}
+
+#submit {
+    margin-left: 30%;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 #register {
     margin-top: 0px;
-    margin-left: 30%;
+    margin-left: 25%;
     color: rgb(88, 130, 185);
     text-decoration: underline;
 }
 
-
-
-#submit {
-    margin-top: 0.5rem;
-    margin-left: 3rem;
-}
-
 #map { 
-    height: 80vh;
-    width: 55%;
-    margin-left: 10vw; 
+    display: flex;
+    position: absolute;
+    top: 20%;
+    height: 75vh;
+    width: 60%;
+    margin-left: 10vw;
+    margin-bottom: 5rem;
     border-radius: 8px;
 }
 

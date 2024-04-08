@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Restaurant search</title>
     <link rel="stylesheet" href="style.css" />
     <link
@@ -21,11 +21,20 @@
 
   <body>
     <h1>Restaurants</h1>
+    <div id="login">
+      <form action="/action_page.php">
+        <input type="text" id="uname" placeholder="Username" /><br />
+        <input type="text" id="pw" placeholder="Password" /><br />
+        <input type="submit" id="submit" value="Log In" />
+        <p id="register">Register</p>
+      </form>
+    </div>
+    <div id="map"></div>
     <aside id="restaurantInfo">
       <ul>
         <li id="daily"><a href="#daily">Daily</a></li>
-        <li><a href="#weekly">Weekly</a></li>
-        <li><a href="#infobox">Info</a></li>
+        <li id="weekly"><a href="#weekly">Weekly</a></li>
+        <li id="info"><a href="#info">Info</a></li>
       </ul>
       <p id="asideParagraph">
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -37,16 +46,5 @@
         mollit anim id est laborum."
       </p>
     </aside>
-    <div id="login">
-      <form action="/action_page.php">
-        <label for="uname">Username:</label><br />
-        <input type="text" id="uname" placeholder="Username" /><br />
-        <label for="pw">Password:</label><br />
-        <input type="text" id="pw" placeholder="Password" /><br />
-        <input type="submit" id="submit" value="Log In" />
-        <p id="register">Register</p>
-      </form>
-    </div>
-    <div id="map"></div>
   </body>
 </html>

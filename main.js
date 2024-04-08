@@ -16,9 +16,22 @@ L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth_dark/{z}/{x}/{y}{
 }).addTo(map);
 
 getPos();
-document.getElementById('daily').addEventListener('click', () => {
+document.getElementById('daily').addEventListener('click', (e) => {
+    document.querySelectorAll('li a').forEach((li)=> {
+        li.style.background = 'rgb(168, 154, 149)';
+    })
+    e.target.style.background = 'rgb(95, 84, 82)';
     const text = document.getElementById('asideParagraph');
     text.innerHTML = 'Daily';
+})
+
+document.getElementById('weekly').addEventListener('click', (e) => {
+    document.querySelectorAll('li a').forEach((li)=> {
+        li.style.background = 'rgb(168, 154, 149)';
+    })
+    e.target.style.background = 'rgb(95, 84, 82)';
+    const text = document.getElementById('asideParagraph');
+    text.innerHTML = 'Weekly';
 })
 
 Array.from(restaurants).forEach((restaurant) => {
