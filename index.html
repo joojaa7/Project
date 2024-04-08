@@ -1,44 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Restaurant search</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script src="main.js" type="module" defer></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Restaurant search</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-  crossorigin=""/>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
-  crossorigin=""></script>
-  <script src="main.js" defer></script>
-</head>
-
-<body>
-  <h1>Restaurants</h1>
-  <aside id="restaurantInfo">
-    <ul>
-      <li id="daily"><a href="#daily">Daily</a></li>
-      <li><a href="#weekly">Weekly</a></li>
-      <li><a href="#infobox">Info</a></li>
-    </ul>
-    <p id="asideParagraph">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-      Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-  </aside>
-  <div id="login">
-    <form action="/action_page.php">
-      <label for="uname">Username:</label><br>
-      <input type="text" id="uname" placeholder="Username"><br>
-      <label for="pw">Password:</label><br>
-      <input type="text" id="pw" placeholder="Password"><br>
-      <input type="submit" id="submit" value="Log In">
-      <p id="register">Register</p>
-    </form> 
-  </div>
-  <div id="map"></div>
-</body>
-
+  <body>
+    <h1>Restaurants</h1>
+    <aside id="restaurantInfo">
+      <ul>
+        <li id="daily"><a href="#daily">Daily</a></li>
+        <li><a href="#weekly">Weekly</a></li>
+        <li><a href="#infobox">Info</a></li>
+      </ul>
+      <p id="asideParagraph">
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
+        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+        mollit anim id est laborum."
+      </p>
+    </aside>
+    <div id="login">
+      <form action="/action_page.php">
+        <label for="uname">Username:</label><br />
+        <input type="text" id="uname" placeholder="Username" /><br />
+        <label for="pw">Password:</label><br />
+        <input type="text" id="pw" placeholder="Password" /><br />
+        <input type="submit" id="submit" value="Log In" />
+        <p id="register">Register</p>
+      </form>
+    </div>
+    <div id="map"></div>
+  </body>
 </html>

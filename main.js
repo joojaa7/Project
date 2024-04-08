@@ -1,3 +1,12 @@
+import { fetchRestaurants} from './utils.js';
+
+
+/*const getRestaurant = async () => {
+    await fetchRestaurants();
+}*/
+
+const restaurants = await fetchRestaurants();
+
 const getPos  = () => navigator.geolocation.getCurrentPosition((pos) => {
     const x = pos.coords.latitude;
     const y = pos.coords.longitude;
@@ -16,3 +25,9 @@ document.getElementById('daily').addEventListener('click', () => {
     const text = document.getElementById('asideParagraph');
     text.innerHTML = 'Daily';
 })
+
+Array.from(restaurants).forEach((restaurant) => {
+      const marker = L.marker([restaurant.location.coordinates[1],restaurant.location.coordinates[0]]).addTo(map);
+        marker.bindPopup(`<h3>${restaurant.name}</h3>
+                    <p>${restaurant.address}</p>`);
+});
