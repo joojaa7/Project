@@ -1,0 +1,124 @@
+html {
+    font-family: Verdana, sans-serif;
+}
+
+body {
+    background-color: rgb(104, 97, 95);
+}
+
+h1 {
+    text-align: center;
+}
+
+aside {
+    background-color: rgb(168, 154, 149);
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    width: 20%;
+    top: 40%;
+    right: 5%;
+    position: absolute;
+    border-style: solid;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+ul {
+    width: 100%;
+    display: flex;
+    list-style-type: none;
+    justify-content: space-evenly;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+li {
+    margin-right: 1rem;
+}
+
+li a {
+    font-weight: bold;
+    font-size: 1rem;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    padding: 0.5rem;
+}
+
+li a:hover {
+    background-color: rgb(95, 84, 82)
+}
+
+#bg {
+    width: 100%;
+    padding: 1rem;
+}
+
+#asideParagraph {
+    text-align: center;
+    margin-top: 0;
+    padding-top: 1rem;
+    color: rgb(218, 209, 209);
+}
+
+
+#login {
+    position: absolute;
+    top: 2rem;
+    right: 10%;
+}
+
+input {
+    margin: 0.3rem;
+}
+
+#submit {
+    margin-left: 30%;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+#register {
+    margin-top: 0px;
+    margin-left: 25%;
+    color: rgb(88, 130, 185);
+    text-decoration: underline;
+}
+
+.filterBox {
+    text-align: center;
+    width: 60%;
+    margin-left: 10vw;
+    margin-top: 10%;
+}
+
+.filter {
+    width: 5rem;
+    margin: auto;
+    border: 0;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+#reset {
+    width: 5rem;
+    display: block;
+    margin: auto;
+    border: 0;
+}
+
+#filterParam {
+    width: 5rem;
+    margin-bottom: 1rem;
+}
+
+#map {
+    display: flex;
+    position: absolute;
+    top: 40%;
+    height: 75vh;
+    width: 60%;
+    margin-left: 10vw;
+    margin-bottom: 5rem;
+    border-radius: 8px;
+}
