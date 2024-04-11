@@ -1,5 +1,7 @@
 import { fetchRestaurants, fetchDailyMenu, fetchWeeklyMenu , fetchRestaurant } from './utils.js';
 
+// Local variables
+
 let restaurantId;
 const restaurants = await fetchRestaurants();
 
@@ -28,6 +30,8 @@ const closestRestaurantIcon = L.icon({
 
 const markers = L.layerGroup().addTo(map);
 
+// Functions
+
 const buildSite  = () => navigator.geolocation.getCurrentPosition((pos) => {
     const x = pos.coords.latitude;
     const y = pos.coords.longitude;
@@ -40,6 +44,7 @@ const buildSite  = () => navigator.geolocation.getCurrentPosition((pos) => {
     createFilter(restaurants);
     menuButtons();
 })
+
 
 const createInfo = async (id) => {
     const restaurant = await fetchRestaurant(id);
