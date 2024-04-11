@@ -29,7 +29,6 @@ ul {
     display: flex;
     flex-wrap: wrap;
     list-style-type: none;
-    justify-content: space-evenly;
     padding: 0;
     margin-bottom: 0;
 }
@@ -98,20 +97,17 @@ input {
     margin-left: 10vw;
 }
 
+
 .filterSelection {
     display: block;
     margin: auto;
     margin-bottom: 1rem;
     width: 5rem;
     border: none;
-}
-.filter {
     width: 5rem;
-    margin: auto;
-    border: 0;
-    display: block;
-    margin-bottom: 1rem;
 }
+
+
 #reset {
     width: 5rem;
     display: block;
