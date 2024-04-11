@@ -28,7 +28,7 @@ const closestRestaurantIcon = L.icon({
 
 const markers = L.layerGroup().addTo(map);
 
-const getPos  = () => navigator.geolocation.getCurrentPosition((pos) => {
+const buildSite  = () => navigator.geolocation.getCurrentPosition((pos) => {
     const x = pos.coords.latitude;
     const y = pos.coords.longitude;
     map.setView([x, y], 11)
@@ -36,6 +36,9 @@ const getPos  = () => navigator.geolocation.getCurrentPosition((pos) => {
                                Math.sqrt((y - b.location.coordinates[0])**2 + (x - b.location.coordinates[1])**2))
     L.marker([x, y], {icon: userIcon}).addTo(map);                           
     createMarkers(restaurants);
+    createSelection(restaurants);
+    createFilter(restaurants);
+    menuButtons();
 })
 
 const createInfo = async (id) => {
@@ -125,6 +128,57 @@ function menuButtons(){
     })
 }
 
+const createSelection = (restaurants) => {
+    const selection = document.getElementById('restaurantSelection');
+    restaurants.forEach((restaurant) => {
+        selection.innerHTML += `<option value='${restaurant.name}'>${restaurant.name} - ${restaurant.city}</option>`
+    })
+    selection.addEventListener('change', () => {
+        markers.clearLayers();
+        createMarkers(restaurants);
+        restaurants.forEach((restaurant) => {
+            if (restaurant.name === selection.value) {
+                map.flyTo([restaurant.location.coordinates[1], restaurant.location.coordinates[0], 11]);
+                return;
+            }
+        })
+        const filter = document.getElementById('filterDropDown');
+        filter.value = 'Filter';
+    })
+}
+
+const createFilter = (restaurants) => {
+    const filter = document.getElementById('filterDropDown')
+    const uniqueFilters = restaurants.reduce((acc, value) => {
+        if (!acc.includes(value.city)) {
+            acc.push(value.city)
+        }
+        if (!acc.includes(value.company)) {
+            acc.push(value.company)
+        }
+        return acc
+    }, []);
+    uniqueFilters.forEach((filtered) => {
+        filter.innerHTML += `<option value='${filtered}'>${filtered}</option>`
+    })
+    filter.addEventListener('change', () => {
+        const filteredRestaurants = filterRestaurants(filter.value);
+        markers.clearLayers();
+        createMarkers(filteredRestaurants);
+        restaurants.forEach((restaurant) => {
+            if (Object.values(restaurant).includes(filter.value)) {
+                map.flyTo([restaurant.location.coordinates[1], restaurant.location.coordinates[0], 11]);
+                return;
+            }
+        })     
+    })    
+    document.getElementById('reset').addEventListener('click', () => {
+        markers.clearLayers();
+        createMarkers(restaurants);
+    })
+}
+
+
 const createMarkers = (restaurants) => {
     Array.from(restaurants).forEach((restaurant, index) => {
         let marker;
@@ -140,7 +194,7 @@ const createMarkers = (restaurants) => {
             createInfo(restaurant._id);
             restaurantId = restaurant._id;
         }).addTo(markers);
-});
+    });
 }
 
 const filterRestaurants = (param) => {
@@ -149,26 +203,4 @@ const filterRestaurants = (param) => {
 
 }
 
-const filterButtons = () => {
-    document.getElementsByClassName('filter')[0].addEventListener('click', () => {
-        const textbox = document.getElementById('filterParam');
-        const filteredRestaurants = filterRestaurants(textbox.value);
-        if (filteredRestaurants.length !== 0){
-            markers.clearLayers();
-            createMarkers(filteredRestaurants);
-        } else {
-            alert('Parameter not found.')
-        }
-        textbox.value = '';
-        console.log(filteredRestaurants)
-        map.flyTo([filteredRestaurants[0].location.coordinates[1], filteredRestaurants[0].location.coordinates[0]], 11)
-    })
-    
-    document.getElementById('reset').addEventListener('click', () => {
-        createMarkers(restaurants);
-    })
-}
-
-getPos();
-menuButtons();
-filterButtons();
+buildSite();

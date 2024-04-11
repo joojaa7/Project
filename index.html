@@ -20,7 +20,6 @@
   </head>
 
   <body>
-    <h1>Restaurants</h1>
     <div id="login">
       <form action="/action_page.php">
         <input type="text" id="uname" placeholder="Username" /><br />
@@ -31,10 +30,14 @@
     </div>
     <div class="filterBox">
       <form class="filterForm">
-        <input type="text" id="filterParam" placeholder="Parameter">
+        <select class="filterSelection" id="filterDropDown">
+          <option>Filter</option>
+        </select>
+        <select class="filterSelection" id="restaurantSelection">
+          <option>Restaurants</option>
+        </select>
+        <button id="reset">Reset</button>
       </form>
-      <button class="filter">Filter</button>
-      <button id="reset">Reset</button>
     </div>
     <div id="map"></div>
     <aside id="restaurantInfo">

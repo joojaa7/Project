@@ -11,21 +11,23 @@ h1 {
 
 aside {
     background-color: rgb(168, 154, 149);
+    margin: auto;
     overflow: hidden;
-    display: flex;
-    flex-wrap: wrap;
-    width: 20%;
+
+    max-width: 20%;
     top: 20%;
     right: 5%;
     position: absolute;
     border-style: solid;
     border-radius: 8px;
     padding: 1rem;
+    justify-content: center;
 }
 
 ul {
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     list-style-type: none;
     justify-content: space-evenly;
     padding: 0;
@@ -33,15 +35,18 @@ ul {
 }
 
 li {
-    margin-right: 1rem;
+    margin-left: 0;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 li a {
+    box-sizing: border-box;
     font-weight: bold;
     font-size: 1rem;
     text-decoration: none;
     color: rgb(0, 0, 0);
-    padding: 0.5rem;
+    padding: 0.5rem 0.5rem 0 0.5rem;
 }
 
 li a:hover {
@@ -51,9 +56,12 @@ li a:hover {
 #bg {
     width: 100%;
     padding: 1rem;
+    box-sizing: border-box;
 }
 
 #asideParagraph {
+    overflow: hidden;
+    white-space: wrap;
     text-align: center;
     margin-top: 0;
     padding-top: 1rem;
@@ -84,9 +92,18 @@ input {
     text-decoration: underline;
 }
 .filterBox {
+    margin-top: 5vh;
     text-align: center;
     width: 60%;
     margin-left: 10vw;
+}
+
+.filterSelection {
+    display: block;
+    margin: auto;
+    margin-bottom: 1rem;
+    width: 5rem;
+    border: none;
 }
 .filter {
     width: 5rem;
