@@ -12,7 +12,11 @@ const getUserByName = async (req, res) => {
 
 
 const postUser = async (req, res) => {
-
+    const request = await addUser(req.body)
+    if (!request) {
+      res.sendStatus(400)
+    }
+    console.log('Post user was a success.')
 }
 
 export { getUserByName, postUser }

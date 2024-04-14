@@ -19,8 +19,5 @@ app.get('/', (req, res) => {
   res.send('Welcome to my REST API!');
 });
 
-app.get('/html', function(req, res){
-  res.sendFile(path.join(__dirname, '../Code/index.html'))
-})
 
 export default app;

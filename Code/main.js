@@ -44,6 +44,8 @@ const buildSite  = () => navigator.geolocation.getCurrentPosition((pos) => {
     restaurants.sort((a, b) => Math.sqrt((y - a.location.coordinates[0])**2 + (x - a.location.coordinates[1])**2)-
                                Math.sqrt((y - b.location.coordinates[0])**2 + (x - b.location.coordinates[1])**2))
     L.marker([x, y], {icon: userIcon}).addTo(map);
+    login();
+    register();
     createMarkers(restaurants);
     createSelection(restaurants);
     createFilter(restaurants);
@@ -217,6 +219,52 @@ const filterRestaurants = (param) => {
     const filteredRestaurants = restaurants.filter(restaurant => Object.values(restaurant).includes(param));
     return filteredRestaurants;
 
+}
+
+const login = () => {
+  document.getElementById('uname').value = '';
+  document.getElementById('pw').value = '';
+  document.getElementById('submit').addEventListener('click', async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('uname').value;
+    const pw = document.getElementById('pw').value;
+    const user = {
+      username : name,
+      password : pw
+    };
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    }
+    const response = await fetch('http://127.0.0.1:5500/login/', options)
+    console.log(response)
+  })
+}
+
+const register = () => {
+  document.getElementById('uname').value = '';
+  document.getElementById('pw').value = '';
+  document.getElementById('register').addEventListener('click', async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('uname').value;
+    const pw = document.getElementById('pw').value;
+    const user = {
+      username : name,
+      password : pw
+    };
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(user)
+    }
+    const response = await fetch('http://127.0.0.1:5500/user/', options)
+    console.log(response)
+  })
 }
 
 buildSite();
