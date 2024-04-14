@@ -2,9 +2,9 @@ import promisePool from '../../utils/database.js';
 
 const addUser = async (user) => {
   console.log('Add user', user)
-  const sql = `INSERT INTO user_info (pw, name)
-               VALUES (?, ?)`
-  const data = [user.username, user.password]
+  const sql = `INSERT INTO wsk_users (password, name, username, email)
+               VALUES (?, ?, ?, ?)`
+  const data = [user.username, user.password, 'Username', 'generic@email.com']
   const rows = await promisePool.execute(sql, data);
   if (rows[0].affectedRows === 0){
     return false
