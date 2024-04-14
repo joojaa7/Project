@@ -28,6 +28,11 @@ const closestRestaurantIcon = L.icon({
     iconSize: [100, 100],
 })
 
+const selectedRestaurant = L.icon({
+  iconUrl: 'restaurantClosest.png',
+  iconSize: [50, 50],
+})
+
 const markers = L.layerGroup().addTo(map);
 
 // Functions
@@ -38,7 +43,7 @@ const buildSite  = () => navigator.geolocation.getCurrentPosition((pos) => {
     map.setView([x, y], 11)
     restaurants.sort((a, b) => Math.sqrt((y - a.location.coordinates[0])**2 + (x - a.location.coordinates[1])**2)-
                                Math.sqrt((y - b.location.coordinates[0])**2 + (x - b.location.coordinates[1])**2))
-    L.marker([x, y], {icon: userIcon}).addTo(map);                           
+    L.marker([x, y], {icon: userIcon}).addTo(map);
     createMarkers(restaurants);
     createSelection(restaurants);
     createFilter(restaurants);
@@ -76,9 +81,9 @@ const createDaily = async (id) => {
       text.innerHTML = menuHTML;
       document.querySelectorAll('li a').forEach((li)=> {
         li.style.background = 'rgb(168, 154, 149)';
-        }); 
+        });
     document.getElementById('bg').style.background = 'rgb(95, 84, 82)';
-    document.getElementById('dailya').style.background = 'rgb(95, 84, 82)';  
+    document.getElementById('dailya').style.background = 'rgb(95, 84, 82)';
 }
 
 const createWeekly= async (id) => {
@@ -96,7 +101,7 @@ const createWeekly= async (id) => {
         li.style.background = 'rgb(168, 154, 149)';
         });
       document.getElementById('bg').style.background = 'rgb(95, 84, 82)';
-      document.getElementById('weeklya').style.background = 'rgb(95, 84, 82)';  
+      document.getElementById('weeklya').style.background = 'rgb(95, 84, 82)';
 }
 
 function menuButtons(){
@@ -110,7 +115,7 @@ function menuButtons(){
         const text = document.getElementById('asideParagraph');
         createDaily(restaurantId);
     })
-    
+
     document.getElementById('weekly').addEventListener('click', (e) => {
         document.querySelectorAll('li a').forEach((li)=> {
             li.style.background = 'rgb(168, 154, 149)';
@@ -121,7 +126,7 @@ function menuButtons(){
         const text = document.getElementById('asideParagraph');
         createWeekly(restaurantId)
     })
-    
+
     document.getElementById('info').addEventListener('click', (e) => {
         document.querySelectorAll('li a').forEach((li)=> {
             li.style.background = 'rgb(168, 154, 149)';
@@ -143,6 +148,12 @@ const createSelection = (restaurants) => {
         createMarkers(restaurants);
         restaurants.forEach((restaurant) => {
             if (restaurant.name === selection.value) {
+                const marker = L.marker([restaurant.location.coordinates[1], restaurant.location.coordinates[0]], {icon: selectedRestaurant})
+                marker.on('click', () => {
+                  createInfo(restaurant._id);
+                  restaurantId = restaurant._id;
+                })
+                marker.addTo(map);
                 map.flyTo([restaurant.location.coordinates[1], restaurant.location.coordinates[0], 11]);
                 return;
             }
@@ -175,8 +186,8 @@ const createFilter = (restaurants) => {
                 map.flyTo([restaurant.location.coordinates[1], restaurant.location.coordinates[0], 11]);
                 return;
             }
-        })     
-    })    
+        })
+    })
     document.getElementById('reset').addEventListener('click', () => {
         markers.clearLayers();
         createMarkers(restaurants);
