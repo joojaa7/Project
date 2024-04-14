@@ -4,7 +4,7 @@ const addUser = async (user) => {
   console.log('Add user', user)
   const sql = `INSERT INTO wsk_users (password, name, username, email)
                VALUES (?, ?, ?, ?)`
-  const data = [user.username, user.password, 'Username', 'generic@email.com']
+  const data = [user.password, user.username, 'Username', 'generic@email.com']
   const rows = await promisePool.execute(sql, data);
   if (rows[0].affectedRows === 0){
     return false
@@ -14,7 +14,7 @@ const addUser = async (user) => {
 }
 
 const getUser = async (user) => {
-  const [rows] = await promisePool.execute('SELECT * FROM user_info WHERE name = ?', [user]);
+  const [rows] = await promisePool.execute('SELECT * FROM wsk_users WHERE name = ?', [user]);
   if (rows.length === 0){
     return false;
   }
