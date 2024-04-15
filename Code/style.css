@@ -1,134 +1,124 @@
 html {
-    font-family: Verdana, sans-serif;
+  font-family: Verdana, sans-serif;
 }
+
 body {
-    background-color: rgb(104, 97, 95);
+  background-color: rgb(104, 97, 95);
 }
 
 h1 {
-    text-align: center;
+  text-align: center;
 }
 
 aside {
-    background-color: rgb(168, 154, 149);
-    margin: auto;
-    overflow: hidden;
-
-    max-width: 20%;
-    top: 20%;
-    right: 5%;
-    position: absolute;
-    border-style: solid;
-    border-radius: 8px;
-    padding: 1rem;
-    justify-content: center;
+  background-color: rgb(168, 154, 149);
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  width: 20%;
+  top: 40%;
+  right: 5%;
+  position: absolute;
+  border-style: solid;
+  border-radius: 8px;
+  padding: 1rem;
 }
 
 ul {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    list-style-type: none;
-    padding: 0;
-    margin-bottom: 0;
-    justify-content: space-evenly;
+  width: 100%;
+  display: flex;
+  list-style-type: none;
+  justify-content: space-evenly;
+  padding: 0;
+  margin-bottom: 0;
 }
 
 li {
-    margin-left: 0;
-    display: flex;
-    flex-wrap: wrap;
+  margin-right: 1rem;
 }
 
 li a {
-    box-sizing: border-box;
-    font-weight: bold;
-    font-size: 1rem;
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    padding: 0.5rem 0.5rem 0 0.5rem;
+  font-weight: bold;
+  font-size: 1rem;
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  padding: 0.5rem;
 }
 
 li a:hover {
-    background-color: rgb(95, 84, 82)
+  background-color: rgb(95, 84, 82)
 }
 
 #bg {
-    width: 100%;
-    padding: 1rem;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 1rem;
 }
 
 #asideParagraph {
-    overflow: hidden;
-    white-space: wrap;
-    text-align: center;
-    margin-top: 0;
-    padding-top: 1rem;
-    color: rgb(218, 209, 209);
+  text-align: center;
+  margin-top: 0;
+  padding-top: 1rem;
+  color: rgb(218, 209, 209);
 }
 
 
 #login {
-    position: absolute;
-    top: 2rem;
-    right: 10%;
+  position: absolute;
+  top: 2rem;
+  right: 10%;
 }
 
 input {
-    margin: 0.3rem;
+  margin: 0.3rem;
 }
 
 #submit {
-    margin-left: 30%;
-    margin-top: 1rem;
-    margin-bottom: 0.5rem;
+  margin-left: 30%;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 #register {
-    margin-top: 0px;
-    margin-left: 25%;
-    color: rgb(88, 130, 185);
-    text-decoration: underline;
+  margin-top: 0px;
+  margin-left: 25%;
+  color: rgb(88, 130, 185);
+  text-decoration: underline;
 }
+
 .filterBox {
-    margin-top: 5vh;
-    text-align: center;
-    width: 60%;
-    margin-left: 10vw;
+  text-align: center;
+  width: 60%;
+  margin-left: 10vw;
+  margin-top: 10%;
 }
 
-
-.filterSelection {
-    display: block;
-    margin: auto;
-    margin-bottom: 1rem;
-    width: 5rem;
-    border: none;
-    width: 5rem;
+.filter {
+  width: 5rem;
+  margin: auto;
+  border: 0;
+  display: block;
+  margin-bottom: 1rem;
 }
-
 
 #reset {
-    width: 5rem;
-    display: block;
-    margin: auto;
-    border: 0;
+  width: 5rem;
+  display: block;
+  margin: auto;
+  border: 0;
 }
 
 #filterParam {
-    width: 5rem;
-    margin-bottom: 1rem;
+  width: 5rem;
+  margin-bottom: 1rem;
 }
 
-#map { 
-    display: flex;
-    position: absolute;
-    top: 20%;
-    height: 75vh;
-    width: 60%;
-    margin-left: 10vw;
-    margin-bottom: 5rem;
-    border-radius: 8px;
+#map {
+  display: flex;
+  position: absolute;
+  top: 40%;
+  height: 75vh;
+  width: 60%;
+  margin-left: 10vw;
+  margin-bottom: 5rem;
+  border-radius: 8px;
 }
-
