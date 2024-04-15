@@ -1,4 +1,4 @@
-GET http://localhost:5500/user/Tester
+GET http://localhost:5500/user/gambas
 
 ### Post
 
