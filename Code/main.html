@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Restaurants</title>
+  <link rel="stylesheet" href="style3.css" />
+  <link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+  integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+  crossorigin=""
+  />
+  <script
+  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+  integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+  crossorigin=""
+  ></script>
+  <script src="test.js" type="module" defer></script>
+</head>
+<body>
+  <div class="container">
+    <div class="top_elements">
+      <div class="user_input">
+        <form class="filter_form">
+          <select class="filter_selection" id="filterDropDown">
+            <option>Filter</option>
+          </select>
+          <select class="filter_selection" id="restaurantSelection">
+            <option>Restaurants</option>
+          </select>
+          <button class="filter_selection" id="reset">Reset</button>
+        </form>
+      </div>
+      <div class="login">
+        <form>
+          <input type="text" id="uname" placeholder="Username" /><br />
+          <input type="text" id="pw" placeholder="Password" /><br />
+          <input type="submit" id="submit" value="Log In" />
+          <p id="register">Register</p>
+        </form>
+      </div>
+    </div>
+    <div class="bottom_elements">
+      <div id="map"></div>
+      <div class="info">
+        <ul>
+          <li id="restaurant_info"><a href="#restaurant_info" id="infoa">Info</a></li>
+          <li id="daily"><a href="#daily" id="dailya">Daily</a></li>
+          <li id="weekly"><a href="#weekly" id="weeklya">Weekly</a></li>
+        </ul>
+        <div id="bg">
+          <p id="info_paragraph">Test</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

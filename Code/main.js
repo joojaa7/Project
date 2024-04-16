@@ -298,7 +298,6 @@ const register = () => {
   document.getElementById('pw').value = '';
   document.getElementById('register').addEventListener('click', async (e) => {
     e.preventDefault();
-    window.location = 'jee.jpg';
     const name = document.getElementById('uname').value;
     const pw = document.getElementById('pw').value;
     const user = {
