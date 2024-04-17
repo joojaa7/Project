@@ -9,6 +9,11 @@ import {
 
 let restaurantId;
 const restaurants = await fetchRestaurants();
+const info = document.getElementById('info_paragraph');
+const textBackGround = document.getElementById('bg');
+const loginDisplay = document.getElementsByClassName('login_form')[0];
+const loggedIn = document.getElementById('logged');
+const loginWrap = document.getElementsByClassName('login')[0];
 
 const map = L.map('map', {zoomControl: false}).setView(
   [60.16952, 24.93545],
@@ -49,7 +54,7 @@ const markers = L.layerGroup().addTo(map);
 
 // Functions
 
-const buildSite = () =>
+const buildSite = (logged) =>
   navigator.geolocation.getCurrentPosition((pos) => {
     const x = pos.coords.latitude;
     const y = pos.coords.longitude;
@@ -66,27 +71,31 @@ const buildSite = () =>
         )
     );
     L.marker([x, y], {icon: userIcon}).addTo(map);
+    loginDisplay.style.display = logged ? 'none' : 'block';
+    loggedIn.style.display = logged ? 'flex' : 'none';
+    loginWrap.style.width = logged ? '40%' : '';
     login();
     register();
     createMarkers(restaurants);
     createSelection(restaurants);
     createFilter(restaurants);
     menuButtons();
+
   });
 
-const createInfo = async (id) => {
-  const restaurant = await fetchRestaurant(id);
-  const text = document.getElementById('asideParagraph');
-  text.innerHTML = `<p>Name: ${restaurant.name}</p>
-                      <p>Company: ${restaurant.company}</p>
-                      <p>City: ${restaurant.city}</p>
-                      <p>Address: ${restaurant.address}</p>`;
-  document.querySelectorAll('li a').forEach((li) => {
-    li.style.background = 'rgb(168, 154, 149)';
-  });
-  document.getElementById('bg').style.background = 'rgb(95, 84, 82)';
-  document.getElementById('infoa').style.background = 'rgb(95, 84, 82)';
-};
+  const createInfo = async (id) => {
+    const restaurant = await fetchRestaurant(id);
+    const text = info
+    text.innerHTML = `<p>Name: ${restaurant.name}</p>
+                        <p>Company: ${restaurant.company}</p>
+                        <p>City: ${restaurant.city}</p>
+                        <p>Address: ${restaurant.address}</p>`;
+    document.querySelectorAll('li a').forEach((li) => {
+      li.style.background = 'rgb(168, 154, 149)';
+    });
+    textBackGround.style.background = 'rgb(95, 84, 82)';
+    document.getElementById('infoa').style.background = 'rgb(95, 84, 82)';
+  };
 
 const createDaily = async (id) => {
   let menuHTML = '';
@@ -100,12 +109,12 @@ const createDaily = async (id) => {
   } else {
     menuHTML = 'Unavailable';
   }
-  const text = document.getElementById('asideParagraph');
+  const text = info;
   text.innerHTML = menuHTML;
   document.querySelectorAll('li a').forEach((li) => {
     li.style.background = 'rgb(168, 154, 149)';
   });
-  document.getElementById('bg').style.background = 'rgb(95, 84, 82)';
+  textBackGround.style.background = 'rgb(95, 84, 82)';
   document.getElementById('dailya').style.background = 'rgb(95, 84, 82)';
 };
 
@@ -118,12 +127,12 @@ const createWeekly = async (id) => {
   } else {
     weeklyMenuHTML = weeklyMenu;
   }
-  const text = document.getElementById('asideParagraph');
+  const text = info;
   text.innerHTML = weeklyMenuHTML;
   document.querySelectorAll('li a').forEach((li) => {
     li.style.background = 'rgb(168, 154, 149)';
   });
-  document.getElementById('bg').style.background = 'rgb(95, 84, 82)';
+  textBackGround.style.background = 'rgb(95, 84, 82)';
   document.getElementById('weeklya').style.background = 'rgb(95, 84, 82)';
 };
 
@@ -134,8 +143,7 @@ const menuButtons = () => {
     });
     e.target.style.background = 'rgb(95, 84, 82)';
     e.target.parentElement.style.background = 'rgb(95, 84, 82)';
-    document.getElementById('bg').style.background = 'rgb(95, 84, 82)';
-    const text = document.getElementById('asideParagraph');
+    textBackGround.style.background = 'rgb(95, 84, 82)';
     createDaily(restaurantId);
   });
 
@@ -145,18 +153,16 @@ const menuButtons = () => {
     });
     e.target.style.background = 'rgb(95, 84, 82)';
     e.target.parentElement.style.background = 'rgb(95, 84, 82)';
-    document.getElementById('bg').style.background = 'rgb(95, 84, 82)';
-    const text = document.getElementById('asideParagraph');
+    textBackGround.style.background = 'rgb(95, 84, 82)';
     createWeekly(restaurantId);
   });
 
-  document.getElementById('info').addEventListener('click', (e) => {
+  document.getElementById('restaurant_info').addEventListener('click', (e) => {
     document.querySelectorAll('li a').forEach((li) => {
       li.style.background = 'rgb(168, 154, 149)';
     });
     e.target.style.background = 'rgb(95, 84, 82)';
-    document.getElementById('bg').style.background = 'rgb(95, 84, 82)';
-    const text = document.getElementById('asideParagraph');
+    textBackGround.style.background = 'rgb(95, 84, 82)';
     createInfo(restaurantId);
   });
 };
@@ -275,21 +281,22 @@ const login = () => {
   document.getElementById('pw').value = '';
   document.getElementById('submit').addEventListener('click', async (e) => {
     e.preventDefault();
-    const name = document.getElementById('uname').value;
-    const pw = document.getElementById('pw').value;
-    const user = {
-      username: name,
-      password: pw,
-    };
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(user),
-    };
-    const response = await fetch('http://127.0.0.1:5500/login/', options);
-    console.log(response);
+    buildSite(true);
+    // const name = document.getElementById('uname').value;
+    // const pw = document.getElementById('pw').value;
+    // const user = {
+    //   username: name,
+    //   password: pw,
+    // };
+    // const options = {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(user),
+    // };
+    // const response = await fetch('http://127.0.0.1:5500/login/', options);
+    // console.log(response);
   });
 };
 
@@ -316,4 +323,4 @@ const register = () => {
   });
 };
 
-buildSite();
+buildSite(false);

@@ -4,11 +4,11 @@
 
 html {
   font-family: Verdana, sans-serif;
+  height: 100%;
 }
 
 body {
   background-image: linear-gradient(rgb(133, 118, 114), rgb(202, 186, 181));
-  height: 98.3dvh;
 }
 
 .top_elements {
@@ -38,6 +38,33 @@ body {
   margin-top: 1rem;
   margin: auto;
   text-align: center;
+  width: 20%;
+}
+
+#logged {
+  width: 40%;
+  margin: auto;
+  display: none;
+}
+
+#avatar {
+  width: 60%;
+  margin: 1rem;
+  min-width: 5rem
+}
+
+#logout_button {
+  background-color: rgb(112, 83, 83);
+  padding: 5px;
+  border-radius: 3px;
+  text-wrap: nowrap;
+  width: fit-content;
+  cursor: pointer;
+  margin: auto;
+}
+
+#logout_button:hover {
+  background-color: rgb(197, 172, 172);
 }
 
 #pw {
@@ -128,7 +155,7 @@ li a:hover {
   color: rgb(218, 209, 209);
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1200px) {
   li {
     overflow: hidden;
   }
