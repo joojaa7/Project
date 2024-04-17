@@ -23,8 +23,6 @@ body {
   text-align: center;
 }
 
-.filter_form {
-}
 
 .filter_selection {
   display: block;
@@ -156,10 +154,13 @@ li a:hover {
 }
 
 @media screen and (max-width: 1200px) {
+  ul {
+    display: block;
+    margin: auto;
+    width: initial;
+  }
   li {
     overflow: hidden;
-  }
-  #weekly {
     margin: 0;
   }
   #daily {
@@ -171,6 +172,15 @@ li a:hover {
   .bottom_elements {
     display: block;
     width: 100%;
+  }
+  ul {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    list-style-type: none;
+    justify-content: space-evenly;
+    padding: 0;
+    margin-bottom: 0;
   }
   #restaurant_info {
     margin-right: 1rem;
