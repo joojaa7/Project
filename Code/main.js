@@ -15,6 +15,11 @@ const loginDisplay = document.getElementsByClassName('login_form')[0];
 const loggedIn = document.getElementById('logged');
 const loginWrap = document.getElementsByClassName('login')[0];
 let firstTime = true;
+let user = JSON.parse(sessionStorage.getItem('user'));
+const userAvatar = document.getElementById('avatar');
+const fileInput = document.querySelector('#file');
+
+console.log(sessionStorage.getItem('user'));
 
 const map = L.map('map', {zoomControl: false}).setView(
   [60.16952, 24.93545],
@@ -83,10 +88,13 @@ const buildSite = (logged) => {
       firstTime = false;
     });
   }
+
+  userAvatar.src = user.avatar ? user.avatar : 'default.jpg'
   loginDisplay.style.display = logged ? 'none' : 'block';
   loggedIn.style.display = logged ? 'flex' : 'none';
   loginWrap.style.width = logged ? '40%' : '';
 }
+
 
   const createInfo = async (id) => {
     const restaurant = await fetchRestaurant(id);
@@ -287,22 +295,34 @@ const login = () => {
   document.getElementById('submit').addEventListener('click', async (e) => {
     e.preventDefault();
     document.getElementById('avatar').src = 'default.jpg';
-    buildSite(true);
-    // const name = document.getElementById('uname').value;
-    // const pw = document.getElementById('pw').value;
-    // const user = {
-    //   username: name,
-    //   password: pw,
-    // };
-    // const options = {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(user),
-    // };
-    // const response = await fetch('http://127.0.0.1:5500/login/', options);
-    // console.log(response);
+    const name = document.getElementById('username').value;
+    const pw = document.getElementById('passw').value;
+    const formData = new FormData();
+    formData.append('username', name)
+    formData.append('password', pw)
+    const loginUser = {
+      username: name,
+      password: pw
+    }
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(loginUser),
+    };
+    console.log(options)
+    const response = await fetch('http://127.0.0.1:5500/login', options);
+    console.log(response);
+    const json = await response.json();
+    if (!json.user) {
+      alert(json.error.message);
+    } else {
+      sessionStorage.setItem('token', json.token);
+      sessionStorage.setItem('user', JSON.stringify(json.user));
+      user = JSON.parse(sessionStorage.getItem('user'));
+      buildSite(true);
+    }
   });
 };
 
@@ -313,26 +333,78 @@ const register = () => {
     e.preventDefault();
     const name = document.getElementById('uname').value;
     const pw = document.getElementById('pw').value;
-    const user = {
+    let avatar = null;
+    const formData = new FormData();
+    if (fileInput.files[0]) {
+      avatar = fileInput.files[0].name;
+      formData.append('file', fileInput.files[0])
+    }
+    formData.append('username', name)
+    formData.append('password', pw)
+    formData.append('avatar', avatar)
+    const options = {
+      method: 'POST',
+      body: formData,
+    };
+    const response = await fetch('http://127.0.0.1:5500/user/register', options);
+    console.log(response)
+
+
+    const userData = {
       username: name,
       password: pw,
     };
-    const options = {
+    const loginOptions = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(user),
-    };
-    const response = await fetch('http://127.0.0.1:5500/user/', options);
-    console.log(response);
+      body: JSON.stringify(userData)
+    }
+
+    const loginResponse = await fetch('http://127.0.0.1:5500/login', loginOptions);
+    const json = await loginResponse.json();
+    console.log('Response: ', json.user, json.token);
+    if (!json.user){
+      console.log(json.error.message)
+    } else {
+      sessionStorage.setItem('token', json.token)
+      sessionStorage.setItem('user', JSON.stringify(json.user))
+      user = JSON.parse(sessionStorage.getItem('user'));
+      buildSite(true);
+    }
   });
 };
 
 const logOut = () => {
   document.getElementById('logout_button').addEventListener('click', () => {
+    sessionStorage.removeItem('user')
+    sessionStorage.removeItem('token')
     buildSite(false);
   })
 }
 
-buildSite(false);
+(async () => {
+  if (sessionStorage.getItem('token') && sessionStorage.getItem('user')){
+    try {
+      const options = {
+        headers: {
+          'Authorization': 'Bearer ' + sessionStorage.getItem('token'),
+          'Content-Type': 'application/json'
+        }
+      }
+      const response = await fetch('http://127.0.0.1:5500/login/verify', options)
+      console.log(response)
+      if (response.ok) {
+        buildSite(true)
+      } else {
+        buildSite(false)
+      }
+    } catch (e) {
+      console.log(e)
+    }
+  }
+  else {
+    buildSite(false);
+  }
+})();

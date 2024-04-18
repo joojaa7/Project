@@ -1,22 +1,37 @@
 import { addUser, getUser} from '../models/user-model.js';
+import bcrypt from 'bcrypt';
 
-const getUserByName = async (req, res) => {
-  console.log(req.params)
-  const user = await getUser(req.params.name)
+const getUserByName = async (name) => {
+  console.log(name)
+  const user = await getUser(name)
+  console.log('get user', user)
   if (user){
-    res.json(user)
+    return user
   } else {
-    res.sendStatus(404);
+    return
   }
 }
 
 
-const postUser = async (req, res) => {
-    const request = await addUser(req.body)
-    if (!request) {
-      res.sendStatus(400)
+const postUser = async (req, res, next) => {
+  req.body.password = bcrypt.hashSync(req.body.password, 5);
+  try {
+    const result = await addUser(req.body, req.file);
+    if (!result) {
+      const error = new Error("Invalid or missing fields")
+      error.status = 400
+      next(error);
+      return;
     }
-    console.log('Post user was a success.')
-}
+    res.status(200).send({message: 'Success.'});
+    next();
+  } catch (error) {
+    console.log('Post user error.')
+    next(error)
+  }
+};
+
+
+
 
 export { getUserByName, postUser }

@@ -1,11 +1,16 @@
 import express from 'express';
-import { login } from '../controllers/auth-controller.js';
+import { getMe, login } from '../controllers/auth-controller.js';
+import { authenticateToken } from '../../middlewares.js';
 
 const authRouter = express.Router();
 
-authRouter.route('/').get(function(req, res){
-  console.log('authRouter')
-}).post(login);
+authRouter.route('/').post(login);
+
+authRouter.route('/verify')
+  .get(
+    authenticateToken,
+    getMe
+  )
 
 
 export default authRouter;

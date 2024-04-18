@@ -20,6 +20,11 @@
 </head>
 <body>
   <div class="container">
+    <form enctype="multipart/form-data" method="post">
+      <input type="file" name="file" id="file" accept="image/*" autocomplete="off">
+      <input type="text" id="uname" placeholder="Username" /><br />
+      <input type="text" id="pw" placeholder="Password" /><br />
+    </form>
     <div class="top_elements">
       <div class="user_input">
         <form class="filter_form">
@@ -35,11 +40,14 @@
       <div class="login">
         <div id="logged">
           <img id="avatar" alt="default avatar">
-          <p id="logout_button">Log Out</p>
+          <div id="profile-buttons">
+            <p class="profile-button" id="logout_button">Log Out</p>
+            <p class="profile-button" id="change-avatar">Change Avatar</p>
+          </div>
         </div>
         <form class="login_form">
-          <input type="text" id="uname" placeholder="Username" /><br />
-          <input type="text" id="pw" placeholder="Password" /><br />
+          <input type="text" id="username" placeholder="Username" autocomplete="off"/>
+          <input type="text" id="passw" placeholder="Password" autocomplete="off"/>
           <input type="submit" id="submit" value="Log In" />
           <p id="register">Register</p>
         </form>
