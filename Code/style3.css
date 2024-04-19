@@ -39,6 +39,27 @@ body {
   width: 20%;
 }
 
+.login_form {
+
+}
+#username {
+  display: block;
+  margin: auto;
+  width: 5rem;
+}
+
+#passw {
+  display: block;
+  margin: auto;
+  width: 5rem;
+}
+
+#submit {
+  margin: 1rem;
+  display: block;
+  margin: auto;
+}
+
 #logged {
   width: 40%;
   margin: auto;
@@ -48,7 +69,8 @@ body {
 #avatar {
   width: 60%;
   margin: 1rem;
-  min-width: 5rem
+  min-width: 5rem;
+  border-style: groove;
 }
 
 #profile-buttons {
@@ -72,12 +94,13 @@ body {
   background-color: rgb(197, 172, 172);
 }
 
+#login-modal {
+}
+
 #pw {
   margin-top: 0.5rem;
 }
-#submit {
-  margin: 1rem;
-}
+
 
 #register {
   font-weight: bold;

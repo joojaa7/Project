@@ -23,7 +23,21 @@ const getUser = async (user) => {
   return rows[0]
 }
 
+const updateAvatarFilename = async (req) => {
+  console.log('Put user', req)
+  const sql = `UPDATE users_single SET avatar = ? WHERE username = ?`
+  const data = [req.body.avatar, req.body.username]
+  const rows = await promisePool.execute(sql, data)
+  if (rows[0].affectedRows === 0){
+    return false
+  }
+  console.log('PUT success')
+  if (req.file){
+    return {avatar: req.file.filename}
+  }
+}
 
 
 
-export {addUser, getUser}
+
+export {addUser, getUser, updateAvatarFilename}

@@ -43,6 +43,12 @@
           <div id="profile-buttons">
             <p class="profile-button" id="logout_button">Log Out</p>
             <p class="profile-button" id="change-avatar">Change Avatar</p>
+            <dialog id="login-modal">
+              <form id="avatar-form">
+                <input type="file" name="file" id="avatar-file" accept="image/*" autocomplete="off">
+                <input type="submit" id="avatar-submit" value="Submit" formmethod="dialog"/>
+              </form>
+            </dialog>
           </div>
         </div>
         <form class="login_form">

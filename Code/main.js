@@ -18,6 +18,7 @@ let firstTime = true;
 let user = JSON.parse(sessionStorage.getItem('user'));
 const userAvatar = document.getElementById('avatar');
 const fileInput = document.querySelector('#file');
+const loginModal = document.getElementById('login-modal')
 
 console.log(sessionStorage.getItem('user'));
 
@@ -86,9 +87,10 @@ const buildSite = (logged) => {
       createFilter(restaurants);
       menuButtons();
       firstTime = false;
+      changeAvatar();
     });
   }
-
+  console.log(user.avatar)
   userAvatar.src = user.avatar ? user.avatar : 'default.jpg'
   loginDisplay.style.display = logged ? 'none' : 'block';
   loggedIn.style.display = logged ? 'flex' : 'none';
@@ -384,7 +386,49 @@ const logOut = () => {
   })
 }
 
+
+const changeAvatar = () => {
+  const avatarFile = document.querySelector('#avatar-file');
+  const inputForm = document.getElementById('avatar-form');
+  document.getElementById('change-avatar').addEventListener('click', () => {
+    loginModal.showModal();
+  document.getElementById('avatar-submit').addEventListener('click', async (e) => {
+    console.log(e)
+    let avatar = null;
+    const formData = new FormData();
+    if (avatarFile.files[0]) {
+      avatar = avatarFile.files[0].name;
+      formData.append('file', avatarFile.files[0])
+    } else {
+      alert('SELECT FILE')
+      return
+    }
+    const userData = JSON.parse(sessionStorage.getItem('user'))
+    formData.append('avatar', avatar);
+    formData.append('username', userData.username);
+    const options = {
+      method: 'PUT',
+      body: formData,
+    };
+    const response = await fetch('http://127.0.0.1:5500/user/avatar', options);
+    const json = await response.json();
+    inputForm.reset();
+    if (response.ok){
+      console.log('OK')
+      userData.avatar = json.avatar
+      sessionStorage.setItem('user', JSON.stringify(userData));
+      user = JSON.parse(sessionStorage.getItem('user'));
+      loginModal.close();
+      buildSite(true)
+    } else {
+      alert(response);
+    }
+  })
+})}
+
 (async () => {
+  const userData = JSON.parse(sessionStorage.getItem('user'))
+  console.log(userData.username);
   if (sessionStorage.getItem('token') && sessionStorage.getItem('user')){
     try {
       const options = {

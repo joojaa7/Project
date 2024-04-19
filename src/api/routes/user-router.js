@@ -1,5 +1,5 @@
 import express from 'express';
-import { getUserByName, postUser } from '../controllers/user-controller.js';
+import { getUserByName, postUser, updateAvatar } from '../controllers/user-controller.js';
 import multer from 'multer';
 import { login } from '../controllers/auth-controller.js';
 
@@ -47,9 +47,9 @@ const upload = multer({
 
 userRouter
   .route('/avatar')
-  .post(
+  .put(
     upload.single('file'),
-    //postUser
+    updateAvatar
 )
 
 userRouter
