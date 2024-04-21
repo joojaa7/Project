@@ -20,11 +20,14 @@
 </head>
 <body>
   <div class="container">
-    <form enctype="multipart/form-data" method="post">
-      <input type="file" name="file" id="file" accept="image/*" autocomplete="off">
-      <input type="text" id="uname" placeholder="Username" /><br />
-      <input type="text" id="pw" placeholder="Password" /><br />
-    </form>
+    <dialog id="register-modal">
+      <form enctype="multipart/form-data" method="post">
+        <input type="text" id="uname" placeholder="Username" /><br />
+        <input type="password" id="pw" placeholder="Password" /><br />
+        <input type="file" name="file" id="file" accept="image/*" autocomplete="off">
+        <p id="register-button">Register</p>
+      </form>
+    </dialog>
     <div class="top_elements">
       <div class="user_input">
         <form class="filter_form">
@@ -53,7 +56,7 @@
         </div>
         <form class="login_form">
           <input type="text" id="username" placeholder="Username" autocomplete="off"/>
-          <input type="text" id="passw" placeholder="Password" autocomplete="off"/>
+          <input type="password" id="passw" placeholder="Password" autocomplete="off"/>
           <input type="submit" id="submit" value="Log In" />
           <p id="register">Register</p>
         </form>

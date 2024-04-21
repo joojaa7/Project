@@ -11,6 +11,28 @@ body {
   background-image: linear-gradient(rgb(133, 118, 114), rgb(202, 186, 181));
 }
 
+#register-modal {
+  background-color: rgb(133, 118, 114);
+  text-align: center;
+}
+
+#register-button {
+  font-weight: bold;
+  width: fit-content;
+  margin: auto;
+  padding: 5px;
+  margin-bottom: 5px;
+  color: rgb(37, 23, 20);
+  border-radius: 8px;
+  background-color: rgb(112, 83, 83);
+  cursor: pointer;
+}
+
+#register-button:hover {
+  cursor: pointer;
+  background-color: rgb(56, 37, 37);
+}
+
 .top_elements {
   width: 80%;
   margin: auto;
@@ -115,6 +137,7 @@ body {
 
 #register:hover {
   cursor: pointer;
+  background-color: rgb(56, 37, 37);
 }
 
 .bottom_elements {

@@ -19,6 +19,7 @@ let user = JSON.parse(sessionStorage.getItem('user'));
 const userAvatar = document.getElementById('avatar');
 const fileInput = document.querySelector('#file');
 const loginModal = document.getElementById('login-modal')
+const registerModal = document.getElementById('register-modal')
 
 console.log(sessionStorage.getItem('user'));
 
@@ -332,7 +333,10 @@ const register = () => {
   document.getElementById('uname').value = '';
   document.getElementById('pw').value = '';
   document.getElementById('register').addEventListener('click', async (e) => {
+    registerModal.showModal();
     e.preventDefault();
+  });
+  document.getElementById('register-button').addEventListener('click', async () => {
     const name = document.getElementById('uname').value;
     const pw = document.getElementById('pw').value;
     let avatar = null;
@@ -373,9 +377,10 @@ const register = () => {
       sessionStorage.setItem('token', json.token)
       sessionStorage.setItem('user', JSON.stringify(json.user))
       user = JSON.parse(sessionStorage.getItem('user'));
+      registerModal.close();
       buildSite(true);
     }
-  });
+  })
 };
 
 const logOut = () => {
@@ -427,8 +432,8 @@ const changeAvatar = () => {
 })}
 
 (async () => {
-  const userData = JSON.parse(sessionStorage.getItem('user'))
-  console.log(userData.username);
+  //const userData = JSON.parse(sessionStorage.getItem('user'))
+  //console.log(userData.username);
   if (sessionStorage.getItem('token') && sessionStorage.getItem('user')){
     try {
       const options = {
