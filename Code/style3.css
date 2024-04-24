@@ -197,6 +197,7 @@ li a:hover {
   width: 100%;
   padding: 1rem;
   background-color: rgb(95, 84, 82);
+  text-align: center;
 }
 
 #info_paragraph {
@@ -204,6 +205,11 @@ li a:hover {
   margin-top: 0;
   padding-top: 1rem;
   color: rgb(218, 209, 209);
+}
+
+#star {
+  width: 10%;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 1200px) {

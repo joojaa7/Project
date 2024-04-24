@@ -20,6 +20,7 @@ const userAvatar = document.getElementById('avatar');
 const fileInput = document.querySelector('#file');
 const loginModal = document.getElementById('login-modal')
 const registerModal = document.getElementById('register-modal')
+const favouriteButton = document.getElementById('star');
 
 console.log(sessionStorage.getItem('user'));
 
@@ -89,6 +90,7 @@ const buildSite = (logged) => {
       menuButtons();
       firstTime = false;
       changeAvatar();
+      favourite();
     });
   }
   console.log(user.avatar)
@@ -267,6 +269,10 @@ const createMarkers = (restaurants) => {
       );
       createInfo(restaurant._id);
       restaurantId = restaurant._id;
+      if (restaurantId === localStorage.getItem('favourite')) {
+        favouriteButton.src = 'star_clicked.png';
+      }
+
     } else {
       marker = L.marker(
         [
@@ -280,6 +286,11 @@ const createMarkers = (restaurants) => {
       .on('click', () => {
         createInfo(restaurant._id);
         restaurantId = restaurant._id;
+        console.log(restaurantId);
+        favouriteButton.src =  'star_clicked.png';
+        if (restaurantId !== localStorage.getItem('favourite')) {
+          favouriteButton.src = 'star.png';
+        }
       })
       .addTo(markers);
   });
@@ -431,9 +442,22 @@ const changeAvatar = () => {
   })
 })}
 
+
+const favourite = () => {
+  favouriteButton.addEventListener('click', async () => {
+      console.log('click')
+    	favouriteButton.src = 'star_clicked.png';
+      if (localStorage.getItem('favourite') === restaurantId) {
+        favouriteButton.src = 'star.png';
+        localStorage.removeItem('favourite');
+        return;
+      }
+      localStorage.setItem('favourite', restaurantId);
+  })
+}
+
+
 (async () => {
-  //const userData = JSON.parse(sessionStorage.getItem('user'))
-  //console.log(userData.username);
   if (sessionStorage.getItem('token') && sessionStorage.getItem('user')){
     try {
       const options = {
