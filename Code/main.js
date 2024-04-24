@@ -326,7 +326,7 @@ const login = () => {
       body: JSON.stringify(loginUser),
     };
     console.log(options)
-    const response = await fetch('http://127.0.0.1:5500/login', options);
+    const response = await fetch('http://127.0.0.1:3000/restaurant/login', options);
     console.log(response);
     const json = await response.json();
     if (!json.user) {
@@ -363,7 +363,7 @@ const register = () => {
       method: 'POST',
       body: formData,
     };
-    const response = await fetch('http://127.0.0.1:5500/user/register', options);
+    const response = await fetch('http://127.0.0.1:3000/restaurant/user/register', options);
     console.log(response)
 
 
@@ -379,7 +379,7 @@ const register = () => {
       body: JSON.stringify(userData)
     }
 
-    const loginResponse = await fetch('http://127.0.0.1:5500/login', loginOptions);
+    const loginResponse = await fetch('http://127.0.0.1:3000/restaurant/login', loginOptions);
     const json = await loginResponse.json();
     console.log('Response: ', json.user, json.token);
     if (!json.user){
@@ -426,7 +426,7 @@ const changeAvatar = () => {
       method: 'PUT',
       body: formData,
     };
-    const response = await fetch('http://127.0.0.1:5500/user/avatar', options);
+    const response = await fetch('http://127.0.0.1:3000/restaurant/user/avatar', options);
     const json = await response.json();
     inputForm.reset();
     if (response.ok){
@@ -466,7 +466,7 @@ const favourite = () => {
           'Content-Type': 'application/json'
         }
       }
-      const response = await fetch('http://127.0.0.1:5500/login/verify', options)
+      const response = await fetch('http://127.0.0.1:3000/login/verify', options)
       console.log(response)
       if (response.ok) {
         buildSite(true)
