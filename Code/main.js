@@ -21,6 +21,9 @@ const fileInput = document.querySelector('#file');
 const loginModal = document.getElementById('login-modal')
 const registerModal = document.getElementById('register-modal')
 const favouriteButton = document.getElementById('star');
+let x = 0;
+let y = 0;
+let favouriteInfo = document.getElementById('favourite');
 
 console.log(sessionStorage.getItem('user'));
 
@@ -66,8 +69,8 @@ const markers = L.layerGroup().addTo(map);
 const buildSite = (logged) => {
   if (firstTime) {
     navigator.geolocation.getCurrentPosition((pos) => {
-      const x = pos.coords.latitude;
-      const y = pos.coords.longitude;
+      x = pos.coords.latitude;
+      y = pos.coords.longitude;
       map.setView([x, y], 11);
       restaurants.sort(
         (a, b) =>
@@ -79,21 +82,22 @@ const buildSite = (logged) => {
             (y - b.location.coordinates[0]) ** 2 +
               (x - b.location.coordinates[1]) ** 2
           )
-      );
-      L.marker([x, y], {icon: userIcon}).addTo(map);
+        );
+        L.marker([x, y], {icon: userIcon}).addTo(map);
+        createMarkers(restaurants);
+      });
+      // L.marker([x, y], {icon: userIcon}).addTo(map);
       login();
       logOut();
       register();
-      createMarkers(restaurants);
+      // createMarkers(restaurants);
       createSelection(restaurants);
       createFilter(restaurants);
       menuButtons();
-      firstTime = false;
       changeAvatar();
       favourite();
-    });
+      firstTime = false;
   }
-  console.log(user.avatar)
   userAvatar.src = user.avatar ? user.avatar : 'default.jpg'
   loginDisplay.style.display = logged ? 'none' : 'block';
   loggedIn.style.display = logged ? 'flex' : 'none';
@@ -293,6 +297,9 @@ const createMarkers = (restaurants) => {
         }
       })
       .addTo(markers);
+      if (restaurant._id === localStorage.getItem('favourite')) {
+        favouriteInfo.innerHTML = `<p>Favourite: ${restaurant.name}</p>`;
+      }
   });
 };
 
@@ -444,15 +451,20 @@ const changeAvatar = () => {
 
 
 const favourite = () => {
-  favouriteButton.addEventListener('click', async () => {
-      console.log('click')
+  favouriteButton.addEventListener('click', () => {
     	favouriteButton.src = 'star_clicked.png';
       if (localStorage.getItem('favourite') === restaurantId) {
         favouriteButton.src = 'star.png';
         localStorage.removeItem('favourite');
+        favouriteInfo.innerHTML = '';
         return;
       }
       localStorage.setItem('favourite', restaurantId);
+      restaurants.forEach((restaurant) => {
+        if (restaurant._id === restaurantId) {
+          favouriteInfo.innerHTML = `<p>Favourite: ${restaurant.name}</p>`;
+        }
+      });
   })
 }
 

@@ -212,6 +212,12 @@ li a:hover {
   cursor: pointer;
 }
 
+#favourite {
+  text-align: center;
+  font-weight: bold;
+  font-size: medium;
+}
+
 @media screen and (max-width: 1200px) {
   ul {
     display: block;
