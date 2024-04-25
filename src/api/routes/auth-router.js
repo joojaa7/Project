@@ -4,7 +4,10 @@ import { authenticateToken } from '../../middlewares.js';
 
 const authRouter = express.Router();
 
-authRouter.route('/').post(login);
+authRouter.route('/').post(function(req, res, next){
+  console.log('Post catch')
+  next();
+},login);
 
 authRouter.route('/verify')
   .get(
