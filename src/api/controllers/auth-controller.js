@@ -6,6 +6,7 @@ import jwt from 'jsonwebtoken';
 const login = async (req, res) => {
   console.log('login', req.body);
   const loginUser = await getUserByName(req.body.username);
+  console.log(req.body.password, loginUser.password);
   if (!loginUser) {
     console.log('noUser')
     res.sendStatus(401);
