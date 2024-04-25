@@ -334,7 +334,7 @@ const login = () => {
       body: JSON.stringify(loginUser),
     };
     console.log(options)
-    const response = await fetch('http://127.0.0.1:3000/restaurant/login', options);
+    const response = await fetch('http://10.120.32.51:3000/restaurant/login', options);
     console.log(response);
     const json = await response.json();
     if (!json.user) {
