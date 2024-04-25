@@ -334,7 +334,7 @@ const login = () => {
       body: JSON.stringify(loginUser),
     };
     console.log(options)
-    const response = await fetch('https://127.0.0.1:3000/restaurant/login', options);
+    const response = await fetch('https://10.120.32.51:3000/restaurant/login', options);
     console.log(response);
     const json = await response.json();
     if (!json.user) {
@@ -491,6 +491,8 @@ const favourite = () => {
     }
   }
   else {
+    const response = await fetch('https://reqres.in/api/users/1');
+    console.log(response);
     buildSite(false);
   }
 })();
