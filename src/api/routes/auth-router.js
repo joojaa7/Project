@@ -9,6 +9,11 @@ authRouter.use(cors());
 
 authRouter.route('/').get((req, res, next) => {
   console.log('Get catch')
+  const user = {
+    username: 'test',
+    password: 'test'
+  };
+  res.json(user);
   next();
 } ).post(function(req, res, next){
   console.log('Post catch')
