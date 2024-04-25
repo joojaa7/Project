@@ -7,7 +7,7 @@ const getUserByName = async (req, res) => {
   const user = await getUser(req.params.name)
   console.log('get user', user)
   if (user){
-    return user
+    return res.json(user)
   } else {
     return
   }
