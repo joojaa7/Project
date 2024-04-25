@@ -1,5 +1,5 @@
 import express from 'express';
-import { getUserByName, postUser, updateAvatar } from '../controllers/user-controller.js';
+import { getUserByName, postUser, updateAvatar, getUserByNameParams } from '../controllers/user-controller.js';
 import multer from 'multer';
 import { login } from '../controllers/auth-controller.js';
 
@@ -67,7 +67,7 @@ userRouter
     postUser
   )
 
-userRouter.route('/:name').get(getUserByName);
+userRouter.route('/:name').get(getUserByNameParams);
 
 
 export default userRouter;

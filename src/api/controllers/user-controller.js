@@ -1,8 +1,18 @@
 import { addUser, getUser, updateAvatarFilename} from '../models/user-model.js';
 import bcrypt from 'bcrypt';
 
-const getUserByName = async (req, res) => {
-  //console.log(name)
+const getUserByName = async (name) => {
+  console.log(name)
+  const user = await getUser(name)
+  console.log('get user', user)
+  if (user){
+    return user
+  } else {
+    return
+  }
+}
+
+const getUserByNameParams = async (req, res) => {
   console.log(req.params)
   const user = await getUser(req.params.name)
   console.log('get user', user)
@@ -12,7 +22,6 @@ const getUserByName = async (req, res) => {
     return
   }
 }
-
 
 const postUser = async (req, res, next) => {
   req.body.password = bcrypt.hashSync(req.body.password, 5);
@@ -46,4 +55,4 @@ const updateAvatar = async (req, res, next) => {
 
 
 
-export { getUserByName, postUser, updateAvatar }
+export { getUserByName, postUser, updateAvatar, getUserByNameParams }

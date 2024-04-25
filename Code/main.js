@@ -329,12 +329,11 @@ const login = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin':  '*'
       },
       body: JSON.stringify(loginUser),
     };
     console.log(options)
-    const response = await fetch('https://127.0.0.1/restaurant/login', options);
+    const response = await fetch('http://127.0.0.1:3000/restaurant/login', options);
     console.log(response);
     const json = await response.json();
     if (!json.user) {
