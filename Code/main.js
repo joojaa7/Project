@@ -329,7 +329,7 @@ const login = () => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin':  '*'
+        'Access-Control-Allow-Origin':  'https://10.120.32.51/'
       },
       body: JSON.stringify(loginUser),
     };
