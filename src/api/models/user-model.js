@@ -24,9 +24,8 @@ const getUser = async (user) => {
 }
 
 const updateAvatarFilename = async (req) => {
-  console.log('Put user', req)
   const sql = `UPDATE users_single SET avatar = ? WHERE username = ?`
-  const data = [req.body.avatar, req.body.username]
+  const data = [req.file.filename, req.body.username]
   const rows = await promisePool.execute(sql, data)
   if (rows[0].affectedRows === 0){
     return false

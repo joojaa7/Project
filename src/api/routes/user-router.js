@@ -23,6 +23,8 @@ const storage = multer.diskStorage({
     }
 
     const filename = `${prefix}-${suffix}.${extension}`;
+    //const filename  =`${originalFilename}.${extension}`;
+    console.log(filename)
 
     cb(null, filename);
   },
