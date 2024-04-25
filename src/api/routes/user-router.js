@@ -61,7 +61,6 @@ userRouter
     console.log('Get catch')
     next();
     },
-    getUserByName
   )
   .post(
     upload.single('file'),
