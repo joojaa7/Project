@@ -5,6 +5,8 @@ import cors from 'cors';
 const app = express();
 const corsOptions = {
   origin: '*',
+  methods: 'GET, POST, PUT, DELETE',
+  allowedHeaders: 'Content-Type, Authorization',
   optionsSuccessStatus: 200
 }
 
