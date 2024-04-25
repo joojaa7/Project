@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 const getUserByName = async (req, res) => {
   //console.log(name)
   console.log(req.params)
-  const user = await getUser(req.params)
+  const user = await getUser(req.params.name)
   console.log('get user', user)
   if (user){
     return user
