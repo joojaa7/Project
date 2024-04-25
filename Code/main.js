@@ -331,7 +331,7 @@ const login = () => {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin':  '*'
       },
-      body: JSON.stringify(loginUser),
+      //body: JSON.stringify(loginUser),
     };
     console.log(options)
     const response = await fetch('https://127.0.0.1/restaurant/login', options);
