@@ -14,6 +14,7 @@ app.use('/restaurant/', express.static('uploads'));
 app.use('/restaurant/', api);
 app.get('/', (req, res) => {
   res.send('Welcome to my REST API!');
+  console.log('Welcome to my REST API!')
 });
 
 export default app;
