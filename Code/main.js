@@ -491,10 +491,6 @@ const favourite = () => {
     }
   }
   else {
-    const response = await fetch('https://reqres.in/api/users/1');
-    console.log(response);
-    const json = await response.json();
-    console.log(json);
     buildSite(false);
   }
 })();
