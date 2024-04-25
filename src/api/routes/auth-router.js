@@ -17,7 +17,7 @@ authRouter.route('/').get((req, res, next) => {
   res.json(user);
   next();
 } ).post(function(req, res, next){
-  console.log('Post catch')
+  console.log(req.headers);
   next();
 },login);
 
