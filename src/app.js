@@ -12,6 +12,9 @@ app.use('/restaurant/', express.static('Code'));
 app.use('/restaurant/', express.static('uploads'));
 
 app.use('/restaurant/', api);
+app.get('/restaurant/get', (req, res) => {
+  res.send('Welcome to my REST API!');
+});
 
 
 export default app;
