@@ -326,7 +326,7 @@ const login = () => {
       password: pw
     }
     const options = {
-      method: 'POST',
+      method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin':  '*'
