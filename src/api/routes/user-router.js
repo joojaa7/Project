@@ -58,7 +58,8 @@ userRouter
   .route('/register')
   .get(function (){
     console.log('Get catch')
-  })
+  }),
+  getUserByName
   .post(
     upload.single('file'),
     postUser
