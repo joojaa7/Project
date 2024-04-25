@@ -57,8 +57,9 @@ userRouter
 userRouter
   .route('/register')
   .get(
-    function (){
+    function (req, res, next) {
     console.log('Get catch')
+    next();
     },
     getUserByName
   )
