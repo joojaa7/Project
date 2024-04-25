@@ -7,7 +7,10 @@ const authRouter = express.Router();
 
 authRouter.use(cors());
 
-authRouter.route('/').post(function(req, res, next){
+authRouter.route('/').get((req, res, next) => {
+  console.log('Get catch')
+  next();
+} ).post(function(req, res, next){
   console.log('Post catch')
   next();
 },login);
