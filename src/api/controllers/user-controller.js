@@ -1,7 +1,7 @@
 import { addUser, getUser, updateAvatarFilename} from '../models/user-model.js';
 import bcrypt from 'bcrypt';
 
-const getUserByName = async (name) => {
+const getUserByName = async (req, res) => {
   console.log(name)
   const user = await getUser(req.params)
   console.log('get user', user)
