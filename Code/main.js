@@ -7,6 +7,7 @@ import {
 
 // Local variables
 
+console.log('New');
 let restaurantId;
 const restaurants = await fetchRestaurants();
 const info = document.getElementById('info_paragraph');
@@ -98,7 +99,7 @@ const buildSite = (logged) => {
       favourite();
       firstTime = false;
   }
-  userAvatar.src = user.avatar ? user.avatar : 'default.jpg'
+  userAvatar.src = user.avatar ? 'https://10.120.32.51/app/restaurant/' + user.avatar : 'https://10.120.32.51/app/restaurant/default.jpg'
   loginDisplay.style.display = logged ? 'none' : 'block';
   loggedIn.style.display = logged ? 'flex' : 'none';
   loginWrap.style.width = logged ? '40%' : '';
@@ -332,8 +333,9 @@ const login = () => {
       },
       body: JSON.stringify(loginUser),
     };
+    console.log(getJson);
     console.log(options)
-    const response = await fetch('http://127.0.0.1:3000/restaurant/login', options);
+    const response = await fetch('https://10.120.32.51/app/restaurant/login', options);
     console.log(response);
     const json = await response.json();
     if (!json.user) {
@@ -370,7 +372,7 @@ const register = () => {
       method: 'POST',
       body: formData,
     };
-    const response = await fetch('http://127.0.0.1:3000/restaurant/user/register', options);
+    const response = await fetch('https://10.120.32.51/app/restaurant/user/register', options);
     console.log(response)
 
 
@@ -386,7 +388,7 @@ const register = () => {
       body: JSON.stringify(userData)
     }
 
-    const loginResponse = await fetch('http://127.0.0.1:3000/restaurant/login', loginOptions);
+    const loginResponse = await fetch('https://10.120.32.51/app/restaurant/login', loginOptions);
     const json = await loginResponse.json();
     console.log('Response: ', json.user, json.token);
     if (!json.user){
@@ -433,7 +435,7 @@ const changeAvatar = () => {
       method: 'PUT',
       body: formData,
     };
-    const response = await fetch('http://127.0.0.1:3000/restaurant/user/avatar', options);
+    const response = await fetch('https://10.120.32.51/app/restaurant/user/avatar', options);
     const json = await response.json();
     inputForm.reset();
     if (response.ok){
@@ -478,7 +480,7 @@ const favourite = () => {
           'Content-Type': 'application/json'
         }
       }
-      const response = await fetch('http://127.0.0.1:3000/restaurant/login/verify', options)
+      const response = await fetch('https://10.120.32.51/app/restaurant/login/verify', options)
       console.log(response)
       if (response.ok) {
         buildSite(true)
