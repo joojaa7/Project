@@ -333,7 +333,6 @@ const login = () => {
       },
       body: JSON.stringify(loginUser),
     };
-    console.log(getJson);
     console.log(options)
     const response = await fetch('https://10.120.32.51/app/restaurant/login', options);
     console.log(response);
@@ -370,6 +369,9 @@ const register = () => {
     formData.append('avatar', avatar)
     const options = {
       method: 'POST',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
       body: formData,
     };
     const response = await fetch('https://10.120.32.51/app/restaurant/user/register', options);
@@ -433,6 +435,9 @@ const changeAvatar = () => {
     formData.append('username', userData.username);
     const options = {
       method: 'PUT',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
       body: formData,
     };
     const response = await fetch('https://10.120.32.51/app/restaurant/user/avatar', options);
