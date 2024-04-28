@@ -407,31 +407,32 @@ const register = () => {
     const response = await fetch('https://10.120.32.51/app/restaurant/user/register', options);
     console.log(response)
 
+    if (response.ok) {
+      const userData = {
+        username: name,
+        password: pw,
+      };
+      const loginOptions = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData)
+      }
 
-    const userData = {
-      username: name,
-      password: pw,
+      const loginResponse = await fetch('https://10.120.32.51/app/restaurant/login', loginOptions);
+      const json = await loginResponse.json();
+      console.log('Response: ', json.user, json.token);
+      if (!json.user){
+        console.log(json.error.message)
+      } else {
+        sessionStorage.setItem('token', json.token)
+        sessionStorage.setItem('user', JSON.stringify(json.user))
+        user = JSON.parse(sessionStorage.getItem('user'));
+        registerModal.close();
+        buildSite(true);
+      }
     };
-    const loginOptions = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(userData)
-    }
-
-    const loginResponse = await fetch('https://10.120.32.51/app/restaurant/login', loginOptions);
-    const json = await loginResponse.json();
-    console.log('Response: ', json.user, json.token);
-    if (!json.user){
-      console.log(json.error.message)
-    } else {
-      sessionStorage.setItem('token', json.token)
-      sessionStorage.setItem('user', JSON.stringify(json.user))
-      user = JSON.parse(sessionStorage.getItem('user'));
-      registerModal.close();
-      buildSite(true);
-    }
   })
 };
 
