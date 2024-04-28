@@ -97,7 +97,9 @@ const buildSite = (logged) => {
       favourite();
       firstTime = false;
   }
-  userAvatar.src = user.avatar ? 'https://10.120.32.51/app/restaurant/' + user.avatar : 'https://10.120.32.51/app/restaurant/default.jpg'
+  if (user) {
+   userAvatar.src = user.avatar ? 'https://10.120.32.51/app/restaurant/' + user.avatar : 'https://10.120.32.51/app/restaurant/default.jpg'
+  }
   loginDisplay.style.display = logged ? 'none' : 'block';
   loggedIn.style.display = logged ? 'flex' : 'none';
   loginWrap.style.width = logged ? '40%' : '';
@@ -281,7 +283,8 @@ const createFilter = (restaurants) => {
       }
     });
   });
-  document.getElementById('reset').addEventListener('click', () => {
+  document.getElementById('reset').addEventListener('click', (e) => {
+    e.preventDefault();
     markers.clearLayers();
     createMarkers(restaurants);
   });

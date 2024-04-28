@@ -1,5 +1,4 @@
 import express from 'express';
-import cors from 'cors';
 import { getMe, login } from '../controllers/auth-controller.js';
 import { authenticateToken } from '../../middlewares.js';
 

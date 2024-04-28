@@ -4,16 +4,12 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 const login = async (req, res) => {
-  console.log('login', req.body);
   const loginUser = await getUserByName(req.body.username);
-  console.log(req.body.password, loginUser.password);
   if (!loginUser) {
-    console.log('noUser')
     res.sendStatus(401);
     return;
   }
   if (!bcrypt.compareSync(req.body.password, loginUser.password)) {
-    console.log('compare sync')
     res.sendStatus(401);
     return;
   }
@@ -25,7 +21,6 @@ const login = async (req, res) => {
   const token = jwt.sign(userWithNoPassword, process.env.JWT_SECRET, {
     expiresIn: '24h',
   });
-  console.log('Login', loginUser)
   res.json({user: userWithNoPassword, token});
 };
 
