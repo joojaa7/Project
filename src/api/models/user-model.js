@@ -1,7 +1,7 @@
 import promisePool from '../../utils/database.js';
 
 const addUser = async (user, file) => {
-  console.log('Add user', user)
+  try {
   const sql = `INSERT INTO users_single (username, password, avatar)
                VALUES (?, ?, ?)`
   const avatar = file?.filename || null;
@@ -10,14 +10,14 @@ const addUser = async (user, file) => {
   if (rows[0].affectedRows === 0){
     return false
   }
-  console.log( 'Success.')
   return {user_id: rows[0].insertId};
+  } catch (e) {
+    }
 }
 
 const getUser = async (user) => {
   const [rows] = await promisePool.execute('SELECT * FROM users_single WHERE username = ?', [user]);
   if (rows.length === 0){
-    console.log(rows, 'Return false')
     return false;
   }
   return rows[0]
@@ -30,7 +30,6 @@ const updateAvatarFilename = async (req) => {
   if (rows[0].affectedRows === 0){
     return false
   }
-  console.log('PUT success')
   if (req.file){
     return {avatar: req.file.filename}
   }

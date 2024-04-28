@@ -7,7 +7,6 @@ import {
 
 // Local variables
 
-console.log('New');
 let restaurantId;
 const restaurants = await fetchRestaurants();
 const info = document.getElementById('info_paragraph');
@@ -26,7 +25,6 @@ let x = 0;
 let y = 0;
 let favouriteInfo = document.getElementById('favourite-name');
 
-console.log(sessionStorage.getItem('user'));
 
 const map = L.map('map', {zoomControl: false}).setView(
   [60.16952, 24.93545],
@@ -160,7 +158,6 @@ const createDailyFavourite = async (id) => {
 const createWeekly = async (id) => {
   let weeklyMenuHTML = '';
   const fWeeklyMenu = await fetchWeeklyMenu(id);
-  console.log(fWeeklyMenu);
   const weeklyMenu = fWeeklyMenu ? fWeeklyMenu : 'Unavailable.';
   if (weeklyMenu !== 'Unavailable.') {
     // Onko missään viikon menua?
@@ -321,7 +318,6 @@ const createMarkers = (restaurants) => {
       .on('click', () => {
         createInfo(restaurant._id);
         restaurantId = restaurant._id;
-        console.log(restaurantId);
         favouriteButton.src =  'star_clicked.png';
         if (restaurantId !== localStorage.getItem('favourite')) {
           favouriteButton.src = 'star.png';
@@ -363,9 +359,7 @@ const login = () => {
       },
       body: JSON.stringify(loginUser),
     };
-    console.log(options)
     const response = await fetch('https://10.120.32.51/app/restaurant/login', options);
-    console.log(response);
     const json = await response.json();
     if (!json.user) {
       alert(json.error.message);
@@ -405,9 +399,6 @@ const register = () => {
       body: formData,
     };
     const response = await fetch('https://10.120.32.51/app/restaurant/user/register', options);
-    console.log(response)
-    console.log(response.message);
-
     if (response.ok) {
       const userData = {
         username: name,
@@ -423,16 +414,15 @@ const register = () => {
 
       const loginResponse = await fetch('https://10.120.32.51/app/restaurant/login', loginOptions);
       const json = await loginResponse.json();
-      console.log('Response: ', json.user, json.token);
-      if (!json.user){
-        console.log(json.error.message)
-      } else {
+      if (json.user){
         sessionStorage.setItem('token', json.token)
         sessionStorage.setItem('user', JSON.stringify(json.user))
         user = JSON.parse(sessionStorage.getItem('user'));
         registerModal.close();
         buildSite(true);
       }
+    } else {
+      alert('Error, try again with a different username');
     };
   })
 };
@@ -452,7 +442,6 @@ const changeAvatar = () => {
   document.getElementById('change-avatar').addEventListener('click', () => {
     loginModal.showModal();
   document.getElementById('avatar-submit').addEventListener('click', async (e) => {
-    console.log(e)
     let avatar = null;
     const formData = new FormData();
     if (avatarFile.files[0]) {
@@ -476,7 +465,6 @@ const changeAvatar = () => {
     const json = await response.json();
     inputForm.reset();
     if (response.ok){
-      console.log('OK')
       userData.avatar = json.avatar
       sessionStorage.setItem('user', JSON.stringify(userData));
       user = JSON.parse(sessionStorage.getItem('user'));
@@ -529,14 +517,12 @@ const favouriteButtons = () => {
         }
       }
       const response = await fetch('https://10.120.32.51/app/restaurant/login/verify', options)
-      console.log(response)
       if (response.ok) {
         buildSite(true)
       } else {
         buildSite(false)
       }
     } catch (e) {
-      console.log(e)
     }
   }
   else {

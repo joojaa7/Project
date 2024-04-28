@@ -1,7 +1,6 @@
 import express from 'express';
-import { getUserByName, postUser, updateAvatar, getUserByNameParams } from '../controllers/user-controller.js';
+import { postUser, updateAvatar } from '../controllers/user-controller.js';
 import multer from 'multer';
-import { login } from '../controllers/auth-controller.js';
 
 const userRouter = express.Router();
 
@@ -21,10 +20,7 @@ const storage = multer.diskStorage({
     if (file.mimetype === 'image/png') {
       extension = 'png';
     }
-
     const filename = `${prefix}-${suffix}.${extension}`;
-    //const filename  =`${originalFilename}.${extension}`;
-    console.log(filename)
 
     cb(null, filename);
   },
@@ -46,7 +42,6 @@ const upload = multer({
 });
 
 
-
 userRouter
   .route('/avatar')
   .put(
@@ -56,18 +51,10 @@ userRouter
 
 userRouter
   .route('/register')
-  .get(
-    function (req, res, next) {
-    console.log('Get catch')
-    next();
-    },
-  )
-  .post(
-    upload.single('file'),
-    postUser
-  )
-
-userRouter.route('/:name').get(getUserByNameParams);
+    .post(
+      upload.single('file'),
+      postUser
+    );
 
 
 export default userRouter;

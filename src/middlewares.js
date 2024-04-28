@@ -2,10 +2,8 @@ import 'dotenv/config';
 import jwt from 'jsonwebtoken';
 
 const authenticateToken = (req, res, next) => {
-  console.log('authenticateToken', req.headers);
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1];
-  console.log('token', token);
   if (token == null) {
     return res.sendStatus(401);
   }
