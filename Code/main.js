@@ -400,8 +400,7 @@ const register = () => {
     const options = {
       method: 'POST',
       headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Headers': '*',
+
       },
       body: formData,
     };
@@ -467,7 +466,7 @@ const changeAvatar = () => {
     const options = {
       method: 'PUT',
       headers: {
-        'Access-Control-Allow-Origin': '*',
+
       },
       body: formData,
     };
