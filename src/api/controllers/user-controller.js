@@ -36,7 +36,8 @@ const postUser = async (req, res, next) => {
     res.status(200).send({message: 'Success.'});
     next();
   } catch (error) {
-    res.status(500).send({message: 'Duplicate username.'});
+    //res.status(500).send({message: 'Duplicate username.'});
+    res.json({message: 'Duplicate username.'})
     console.log('Post user error.')
     next(error)
   }
