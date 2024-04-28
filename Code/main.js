@@ -406,6 +406,7 @@ const register = () => {
     };
     const response = await fetch('https://10.120.32.51/app/restaurant/user/register', options);
     console.log(response)
+    console.log(response.message);
 
     if (response.ok) {
       const userData = {
