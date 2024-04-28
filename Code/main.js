@@ -24,7 +24,7 @@ const registerModal = document.getElementById('register-modal')
 const favouriteButton = document.getElementById('star');
 let x = 0;
 let y = 0;
-let favouriteInfo = document.getElementById('favourite');
+let favouriteInfo = document.getElementById('favourite-name');
 
 console.log(sessionStorage.getItem('user'));
 
@@ -87,14 +87,14 @@ const buildSite = (logged) => {
         L.marker([x, y], {icon: userIcon}).addTo(map);
         createMarkers(restaurants);
       });
-      // L.marker([x, y], {icon: userIcon}).addTo(map);
       login();
       logOut();
       register();
-      // createMarkers(restaurants);
       createSelection(restaurants);
       createFilter(restaurants);
       menuButtons();
+      favouriteButtons();
+      createDailyFavourite(localStorage.getItem('favourite'));
       changeAvatar();
       favourite();
       firstTime = false;
@@ -106,19 +106,19 @@ const buildSite = (logged) => {
 }
 
 
-  const createInfo = async (id) => {
-    const restaurant = await fetchRestaurant(id);
-    const text = info
-    text.innerHTML = `<p>Name: ${restaurant.name}</p>
-                        <p>Company: ${restaurant.company}</p>
-                        <p>City: ${restaurant.city}</p>
-                        <p>Address: ${restaurant.address}</p>`;
-    document.querySelectorAll('li a').forEach((li) => {
-      li.style.background = 'rgb(168, 154, 149)';
-    });
-    textBackGround.style.background = 'rgb(95, 84, 82)';
-    document.getElementById('infoa').style.background = 'rgb(95, 84, 82)';
-  };
+const createInfo = async (id) => {
+  const restaurant = await fetchRestaurant(id);
+  const text = info
+  text.innerHTML = `<p>Name: ${restaurant.name}</p>
+                      <p>Company: ${restaurant.company}</p>
+                      <p>City: ${restaurant.city}</p>
+                      <p>Address: ${restaurant.address}</p>`;
+  document.querySelectorAll('li a').forEach((li) => {
+    li.style.background = 'rgb(168, 154, 149)';
+  });
+  textBackGround.style.background = 'rgb(95, 84, 82)';
+  document.getElementById('infoa').style.background = 'rgb(95, 84, 82)';
+};
 
 const createDaily = async (id) => {
   let menuHTML = '';
@@ -141,9 +141,26 @@ const createDaily = async (id) => {
   document.getElementById('dailya').style.background = 'rgb(95, 84, 82)';
 };
 
+const createDailyFavourite = async (id) => {
+  let menuHTML = '';
+  const dailyMenu = await fetchDailyMenu(id);
+  if (dailyMenu.courses.length !== 0) {
+    dailyMenu.courses.forEach((course) => {
+      const {price} = course;
+      const existingPrice = price ? price : 'No pricing info.';
+      menuHTML += `<p>${course.name} -  ${existingPrice}</p>`;
+    });
+  } else {
+    menuHTML = 'Unavailable';
+  }
+  const text = document.getElementById('fav-info-paragraph');
+  text.innerHTML = menuHTML;
+};
+
 const createWeekly = async (id) => {
   let weeklyMenuHTML = '';
   const fWeeklyMenu = await fetchWeeklyMenu(id);
+  console.log(fWeeklyMenu);
   const weeklyMenu = fWeeklyMenu ? fWeeklyMenu : 'Unavailable.';
   if (weeklyMenu !== 'Unavailable.') {
     // Onko missään viikon menua?
@@ -157,6 +174,19 @@ const createWeekly = async (id) => {
   });
   textBackGround.style.background = 'rgb(95, 84, 82)';
   document.getElementById('weeklya').style.background = 'rgb(95, 84, 82)';
+};
+
+const createWeeklyFavourite = async (id) => {
+  let weeklyMenuHTML = '';
+  const fWeeklyMenu = await fetchWeeklyMenu(id);
+  const weeklyMenu = fWeeklyMenu ? fWeeklyMenu : 'Unavailable.';
+  if (weeklyMenu !== 'Unavailable.') {
+    // Onko missään viikon menua?
+  } else {
+    weeklyMenuHTML = weeklyMenu;
+  }
+  const text = document.getElementById('fav-info-paragraph');
+  text.innerHTML = weeklyMenuHTML;
 };
 
 const menuButtons = () => {
@@ -371,6 +401,7 @@ const register = () => {
       method: 'POST',
       headers: {
         'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': '*',
       },
       body: formData,
     };
@@ -467,6 +498,7 @@ const favourite = () => {
         return;
       }
       localStorage.setItem('favourite', restaurantId);
+      createDailyFavourite(localStorage.getItem('favourite'));
       restaurants.forEach((restaurant) => {
         if (restaurant._id === restaurantId) {
           favouriteInfo.innerHTML = `<p>Favourite: ${restaurant.name}</p>`;
@@ -474,6 +506,16 @@ const favourite = () => {
       });
   })
 }
+
+const favouriteButtons = () => {
+  document.getElementById('f-daily').addEventListener('click', (e) => {
+    createDailyFavourite(localStorage.getItem('favourite'));
+  });
+  document.getElementById('f-weekly').addEventListener('click', (e) => {
+    createWeeklyFavourite(localStorage.getItem('favourite'));
+  });
+};
+
 
 
 (async () => {

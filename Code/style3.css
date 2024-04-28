@@ -8,7 +8,8 @@ html {
 }
 
 body {
-  background-image: linear-gradient(rgb(133, 118, 114), rgb(202, 186, 181));
+  /* background-image: linear-gradient(rgb(133, 118, 114), rgb(202, 186, 181)); */
+  background-color: rgb(133, 118, 114);
 }
 
 #register-modal {
@@ -95,6 +96,7 @@ body {
   border-style: groove;
 }
 
+
 #profile-buttons {
   margin: auto;
 }
@@ -117,6 +119,7 @@ body {
 }
 
 #login-modal {
+  background-color: rgb(133, 118, 114);
 }
 
 #pw {
@@ -212,14 +215,44 @@ li a:hover {
   cursor: pointer;
 }
 
+#bg-container {
+  text-align: center;
+  display: flex;
+}
+
 #favourite {
   text-align: center;
   font-weight: bold;
   font-size: medium;
 }
 
+#ul-fav a {
+  font-size: large;
+}
+
+#fav-bg {
+  background-color: rgb(95, 84, 82);
+  margin: auto;
+  border-radius: 1rem;
+  margin-top: 1rem;
+}
+
+#favourite-name {
+  padding: 0.5rem;
+  margin-bottom: 0;
+  display: block;
+  color: white;
+}
+
+#fav-info-paragraph {
+  font-weight: normal;
+  padding: 1rem 1rem 3rem 1rem;
+  margin-top: 0;
+  color: white;
+}
+
 @media screen and (max-width: 1200px) {
-  ul {
+  #ul-menu {
     display: block;
     margin: auto;
     width: initial;
@@ -238,7 +271,7 @@ li a:hover {
     display: block;
     width: 100%;
   }
-  ul {
+  #ul-menu {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
