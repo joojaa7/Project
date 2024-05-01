@@ -107,76 +107,90 @@ const buildSite = (logged) => {
 
 
 const createInfo = async (id) => {
-  const restaurant = await fetchRestaurant(id);
-  const text = info
-  text.innerHTML = `<p>Name: ${restaurant.name}</p>
-                      <p>Company: ${restaurant.company}</p>
-                      <p>City: ${restaurant.city}</p>
-                      <p>Address: ${restaurant.address}</p>`;
-  document.querySelectorAll('li a').forEach((li) => {
-    li.style.background = 'rgb(168, 154, 149)';
-  });
-  textBackGround.style.background = 'rgb(95, 84, 82)';
-  document.getElementById('infoa').style.background = 'rgb(95, 84, 82)';
+  try {
+    const restaurant = await fetchRestaurant(id);
+    const text = info
+    text.innerHTML = `<p>Name: ${restaurant.name}</p>
+                        <p>Company: ${restaurant.company}</p>
+                        <p>City: ${restaurant.city}</p>
+                        <p>Address: ${restaurant.address}</p>`;
+    document.querySelectorAll('li a').forEach((li) => {
+      li.style.background = 'rgb(168, 154, 149)';
+    });
+    textBackGround.style.background = 'rgb(95, 84, 82)';
+    document.getElementById('infoa').style.background = 'rgb(95, 84, 82)';
+  } catch (e) {
+    alert('Error fetching restaurant info');
+  };
 };
 
 const createDaily = async (id) => {
   let menuHTML = '';
-  const dailyMenu = await fetchDailyMenu(id);
-  if (dailyMenu.courses.length !== 0) {
-    dailyMenu.courses.forEach((course) => {
-      const {price} = course;
-      const existingPrice = price ? price : 'No pricing info.';
-      menuHTML += `<p>${course.name} -  ${existingPrice}</p>`;
+  try {
+    const dailyMenu = await fetchDailyMenu(id);
+    if (dailyMenu.courses.length !== 0) {
+      dailyMenu.courses.forEach((course) => {
+        const {price} = course;
+        const existingPrice = price ? price : 'No pricing info.';
+        menuHTML += `<p>${course.name} -  ${existingPrice}</p>`;
+      });
+    } else {
+      menuHTML = 'Unavailable';
+    }
+    const text = info;
+    text.innerHTML = menuHTML;
+    document.querySelectorAll('li a').forEach((li) => {
+      li.style.background = 'rgb(168, 154, 149)';
     });
-  } else {
-    menuHTML = 'Unavailable';
-  }
-  const text = info;
-  text.innerHTML = menuHTML;
-  document.querySelectorAll('li a').forEach((li) => {
-    li.style.background = 'rgb(168, 154, 149)';
-  });
-  textBackGround.style.background = 'rgb(95, 84, 82)';
-  document.getElementById('dailya').style.background = 'rgb(95, 84, 82)';
+    textBackGround.style.background = 'rgb(95, 84, 82)';
+    document.getElementById('dailya').style.background = 'rgb(95, 84, 82)';
+  } catch (e) {
+  };
 };
 
 const createDailyFavourite = async (id) => {
   let menuHTML = '';
-  const dailyMenu = await fetchDailyMenu(id);
-  if (dailyMenu.courses.length !== 0) {
-    dailyMenu.courses.forEach((course) => {
-      const {price} = course;
-      const existingPrice = price ? price : 'No pricing info.';
-      menuHTML += `<p>${course.name} -  ${existingPrice}</p>`;
-    });
-  } else {
-    menuHTML = 'Unavailable';
-  }
-  const text = document.getElementById('fav-info-paragraph');
-  text.innerHTML = menuHTML;
+  try {
+    const dailyMenu = await fetchDailyMenu(id);
+    if (dailyMenu.courses.length !== 0) {
+      dailyMenu.courses.forEach((course) => {
+        const {price} = course;
+        const existingPrice = price ? price : 'No pricing info.';
+        menuHTML += `<p>${course.name} -  ${existingPrice}</p>`;
+      });
+    } else {
+      menuHTML = 'Unavailable';
+    }
+    const text = document.getElementById('fav-info-paragraph');
+    text.innerHTML = menuHTML;
+  } catch (e) {
+  };
 };
 
 const createWeekly = async (id) => {
   let weeklyMenuHTML = '';
-  const fWeeklyMenu = await fetchWeeklyMenu(id);
-  const weeklyMenu = fWeeklyMenu ? fWeeklyMenu : 'Unavailable.';
-  if (weeklyMenu !== 'Unavailable.') {
-    // Onko missään viikon menua?
-  } else {
-    weeklyMenuHTML = weeklyMenu;
-  }
-  const text = info;
-  text.innerHTML = weeklyMenuHTML;
-  document.querySelectorAll('li a').forEach((li) => {
-    li.style.background = 'rgb(168, 154, 149)';
-  });
-  textBackGround.style.background = 'rgb(95, 84, 82)';
-  document.getElementById('weeklya').style.background = 'rgb(95, 84, 82)';
+  try {
+    const fWeeklyMenu = await fetchWeeklyMenu(id);
+    const weeklyMenu = fWeeklyMenu ? fWeeklyMenu : 'Unavailable.';
+    if (weeklyMenu !== 'Unavailable.') {
+      // Onko missään viikon menua?
+    } else {
+      weeklyMenuHTML = weeklyMenu;
+    }
+    const text = info;
+    text.innerHTML = weeklyMenuHTML;
+    document.querySelectorAll('li a').forEach((li) => {
+      li.style.background = 'rgb(168, 154, 149)';
+    });
+    textBackGround.style.background = 'rgb(95, 84, 82)';
+    document.getElementById('weeklya').style.background = 'rgb(95, 84, 82)';
+  } catch (e) {
+  };
 };
 
 const createWeeklyFavourite = async (id) => {
   let weeklyMenuHTML = '';
+  try {
   const fWeeklyMenu = await fetchWeeklyMenu(id);
   const weeklyMenu = fWeeklyMenu ? fWeeklyMenu : 'Unavailable.';
   if (weeklyMenu !== 'Unavailable.') {
@@ -186,6 +200,8 @@ const createWeeklyFavourite = async (id) => {
   }
   const text = document.getElementById('fav-info-paragraph');
   text.innerHTML = weeklyMenuHTML;
+  } catch (e) {
+  };
 };
 
 const menuButtons = () => {
@@ -362,16 +378,19 @@ const login = () => {
       },
       body: JSON.stringify(loginUser),
     };
-    const response = await fetch('https://10.120.32.51/app/restaurant/login', options);
-    const json = await response.json();
-    if (!json.user) {
-      alert(json.error.message);
-    } else {
-      sessionStorage.setItem('token', json.token);
-      sessionStorage.setItem('user', JSON.stringify(json.user));
-      user = JSON.parse(sessionStorage.getItem('user'));
-      buildSite(true);
-    }
+    try {
+      const response = await fetch('https://10.120.32.51/app/restaurant/login', options);
+      const json = await response.json();
+      if (!json.user) {
+        alert(json.error.message);
+      } else {
+        sessionStorage.setItem('token', json.token);
+        sessionStorage.setItem('user', JSON.stringify(json.user));
+        user = JSON.parse(sessionStorage.getItem('user'));
+        buildSite(true);
+      }
+    } catch (e){
+    };
   });
 };
 
@@ -401,34 +420,36 @@ const register = () => {
       },
       body: formData,
     };
-    const response = await fetch('https://10.120.32.51/app/restaurant/user/register', options);
-    if (response.ok) {
-      const userData = {
-        username: name,
-        password: pw,
-      };
-      const loginOptions = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(userData)
-      }
+    try {
+      const response = await fetch('https://10.120.32.51/app/restaurant/user/register', options);
+      if (response.ok) {
+        const userData = {
+          username: name,
+          password: pw,
+        };
+        const loginOptions = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(userData)
+        }
 
-      const loginResponse = await fetch('https://10.120.32.51/app/restaurant/login', loginOptions);
-      const json = await loginResponse.json();
-      if (json.user){
-        sessionStorage.setItem('token', json.token)
-        sessionStorage.setItem('user', JSON.stringify(json.user))
-        user = JSON.parse(sessionStorage.getItem('user'));
-        registerModal.close();
-        buildSite(true);
-      }
-    } else {
-      alert('Error, try again with a different username');
-    };
-  })
-};
+        const loginResponse = await fetch('https://10.120.32.51/app/restaurant/login', loginOptions);
+        const json = await loginResponse.json();
+        if (json.user){
+          sessionStorage.setItem('token', json.token)
+          sessionStorage.setItem('user', JSON.stringify(json.user))
+          user = JSON.parse(sessionStorage.getItem('user'));
+          registerModal.close();
+          buildSite(true);
+        }
+      } else {
+        alert('Error, try again with a different username');
+      };
+    } catch (e) {
+  };
+})};
 
 const logOut = () => {
   document.getElementById('logout_button').addEventListener('click', () => {
@@ -443,7 +464,7 @@ const changeAvatar = () => {
   const avatarFile = document.querySelector('#avatar-file');
   const inputForm = document.getElementById('avatar-form');
   document.getElementById('change-avatar').addEventListener('click', () => {
-    loginModal.showModal();
+    loginModal.showModal()});
   document.getElementById('avatar-submit').addEventListener('click', async (e) => {
     let avatar = null;
     const formData = new FormData();
@@ -464,20 +485,22 @@ const changeAvatar = () => {
       },
       body: formData,
     };
-    const response = await fetch('https://10.120.32.51/app/restaurant/user/avatar', options);
-    const json = await response.json();
-    inputForm.reset();
-    if (response.ok){
-      userData.avatar = json.avatar
-      sessionStorage.setItem('user', JSON.stringify(userData));
-      user = JSON.parse(sessionStorage.getItem('user'));
-      loginModal.close();
-      buildSite(true)
-    } else {
-      alert(response);
-    }
-  })
-})}
+    try {
+      const response = await fetch('https://10.120.32.51/app/restaurant/user/avatar', options);
+      const json = await response.json();
+      inputForm.reset();
+      if (response.ok){
+        userData.avatar = json.avatar
+        sessionStorage.setItem('user', JSON.stringify(userData));
+        user = JSON.parse(sessionStorage.getItem('user'));
+        loginModal.close();
+        buildSite(true)
+      } else {
+        alert(response);
+      }
+    } catch (e){
+    };
+  })};
 
 
 const favourite = () => {
