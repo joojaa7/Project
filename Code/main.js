@@ -453,8 +453,10 @@ const register = () => {
 
 const logOut = () => {
   document.getElementById('logout_button').addEventListener('click', () => {
-    sessionStorage.removeItem('user')
-    sessionStorage.removeItem('token')
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('token');
+    localStorage.removeItem('favourite');
+    favouriteInfo.innerHTML = 'No favourite selected.'
     buildSite(false);
   })
 }
@@ -534,6 +536,9 @@ const favouriteButtons = () => {
 
 
 (async () => {
+  if (!localStorage.getItem('favourite')){
+    favouriteInfo.innerHTML = 'No favourite selected.'
+  }
   if (sessionStorage.getItem('token') && sessionStorage.getItem('user')){
     try {
       const options = {
@@ -544,9 +549,10 @@ const favouriteButtons = () => {
       }
       const response = await fetch('https://10.120.32.51/app/restaurant/login/verify', options)
       if (response.ok) {
-        buildSite(true)
+        buildSite(true);
       } else {
-        buildSite(false)
+        buildSite(false);
+        localStorage.removeItem('favourite');
       }
     } catch (e) {
     }
